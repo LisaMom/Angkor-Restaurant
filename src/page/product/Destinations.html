@@ -9,15 +9,15 @@
   <!-- <link rel="stylesheet" href="../src/output.css"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            display: ['Cormorant Garamond', 'serif'],
-            sans: ['DM Sans', 'sans-serif'],
+            display: ['Inter', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
           },
           colors: {
             sand: {
@@ -66,7 +66,7 @@
     }
   </script>
   <style>
-    .font-display { font-family: 'Cormorant Garamond', serif; }
+    .font-display { font-family: 'Inter', sans-serif; }
 
     /* ── Grain overlay ── */
     body::after {
@@ -134,6 +134,35 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* ── Global scale-up ── */
+    html { font-size: 19px; }
+    p, li, a, span, input, button, label { font-size: inherit; }
+    .text-sm   { font-size: 1rem    !important; }
+    .text-xs   { font-size: 0.88rem !important; }
+    .text-base { font-size: 1.15rem !important; }
+    .text-lg   { font-size: 1.3rem  !important; }
+    .text-xl   { font-size: 1.5rem  !important; }
+    .text-2xl  { font-size: 1.8rem  !important; }
+    .text-3xl  { font-size: 2.2rem  !important; }
+    .text-4xl  { font-size: 2.8rem  !important; }
+    .text-5xl  { font-size: 3.6rem  !important; }
+
+    /* ── Scale up images & cards ── */
+    .dest-card .card-img-wrap { height: 240px !important; }
+    img { transform-origin: center; }
+    .h-44 { height: 13rem !important; }
+    .h-80 { height: 26rem !important; }
+    .h-96 { height: 32rem !important; }
+    .w-10 { width: 3rem !important; }
+    .h-10 { height: 3rem !important; }
+    .rounded-2xl { border-radius: 1.2rem !important; }
+    .rounded-3xl { border-radius: 1.6rem !important; }
+    .p-7 { padding: 2.2rem !important; }
+    .p-6 { padding: 1.8rem !important; }
+    .gap-6 { gap: 1.8rem !important; }
+    .gap-10 { gap: 2.8rem !important; }
+    .max-w-7xl { max-width: 90rem !important; }
+
     /* ── Destination cards ── */
     .dest-card { transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.35s ease; }
     .dest-card:hover { transform: translateY(-8px) scale(1.01); }
@@ -197,7 +226,7 @@
   </style>
 </head>
 
-<body class="bg-sand-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
+<body class="bg-sand-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300 text-[19px]">
 
 
   <!-- ══════════════════════ NAVBAR ══════════════════════ -->
