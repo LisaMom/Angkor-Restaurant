@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details — Angkor Travels</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Flowbite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js" defer></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up {
+            animation: fadeUp 0.75s ease both;
+        }
+
+        .delay-1 {
+            animation-delay: 0.15s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.35s;
+        }
+
+        #hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('imgs/angkorwat-picture.jpg') center/cover no-repeat;
+            will-change: transform;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-card,
+        .tour-card,
+        .travel-main {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover,
+        .tour-card:hover,
+        .travel-main:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: #059669;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: .3s ease;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            #toast {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1rem;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white">
+
+
+    <!-- NAVBAR -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 -translate-y-full opacity-0 transition-all duration-500">
+        <nav class="backdrop-blur-md bg-black/35 border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+
+                <!-- Logo -->
+                <div class="text-white text-xl sm:text-2xl font-bold tracking-wide">
+                    Angkor Travels
+                </div>
+
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex items-center gap-8 text-white text-sm font-medium">
+                    <li><a href="#" class="hover:text-emerald-300 transition">Home</a></li>
+                    <li><a href="#explore" class="hover:text-emerald-300 transition">Destinations</a></li>
+                    <li><a href="#" class="hover:text-emerald-300 transition">About Us</a></li>
+                    <li>
+                        <a href="#" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-full transition">
+                            Signup / Login
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Mobile Button -->
+                <button id="menuBtn" class="md:hidden text-white">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 text-white space-y-3 bg-black/70">
+                <a href="#" class="block hover:text-emerald-300">Home</a>
+                <a href="#explore" class="block hover:text-emerald-300">Destinations</a>
+                <a href="#" class="block hover:text-emerald-300">About Us</a>
+                <a href="#" class="block bg-emerald-600 text-center py-2 rounded-full hover:bg-emerald-500 transition">
+                    Signup / Login
+                </a>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- HERO -->
+    <section class="relative pt-20 h-72 sm:h-96 overflow-hidden">
+        <div id="hero-bg"></div>
+        <div class="absolute inset-0 bg-black/55"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 fade-up">
+            <p class="text-sm uppercase tracking-widest text-emerald-300 mb-3 font-medium">Angkor Travels</p>
+            <h1 class="text-3xl sm:text-5xl font-bold text-white leading-tight">Get to know more about Cambodia</h1>
+            <div class="mt-5 h-0.5 w-16 bg-emerald-400 rounded-full"></div>
+            <p class="mt-5 text-white/75 text-base sm:text-lg max-w-md fade-up delay-1"> Discover iconic destinations,
+                culture, beaches, mountains, and unforgettable experiences across the Kingdom of Wonder. </p>
+        </div>
+    </section>
+
+
+    <!-- Title -->
+    <section id="explore" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl sm:text-6xl font-bold">Explore Cambodia</h1>
+            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Click a destination and unlock hidden gems, unforgettable
+                moments, and amazing places to visit.</p>
+        </div>
+
+        <style>
+            /* .travel-wrap {
+                display: grid;
+                gap: 24px;
+            } */
+
+            .travel-item {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 24px;
+                align-items: stretch;
+            }
+
+            .travel-main,
+            .travel-side,
+            .travel-desc {
+                background: #fff;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+            }
+
+            .travel-desc {
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                transition: .4s ease;
+            }
+
+            .travel-side {
+                background: #fff;
+                border-radius: 24px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+                padding: 0 24px;
+                transition: all 0.45s ease;
+            }
+
+            .travel-side.show {
+                max-height: 1000px;
+                opacity: 1;
+                padding: 24px;
+            }
+
+            .travel-desc.hide {
+                display: none;
+            }
+
+            .mini-card {
+                background: #fff;
+                border-radius: 18px;
+                overflow: hidden;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+            }
+
+            @media(min-width:1024px) {
+                .travel-item {
+                    grid-template-columns: 360px 1fr;
+                    grid-template-areas:
+                        "main content";
+                    align-items: start;
+                }
+
+                .travel-main {
+                    grid-area: main;
+                }
+
+                .travel-desc,
+                .travel-side {
+                    grid-area: content;
+                }
+            }
+        </style>
+
+        <script>
+            function openPlace(id, descId) {
+                const panels = document.querySelectorAll('.travel-side');
+                const descs = document.querySelectorAll('.travel-desc');
+
+                const panel = document.getElementById(id);
+                const desc = document.getElementById(descId);
+
+                const isOpen = panel.classList.contains('show');
+
+                panels.forEach(item => item.classList.remove('show'));
+                descs.forEach(item => item.classList.remove('hide'));
+
+                if (!isOpen) {
+                    panel.classList.add('show');
+                    desc.classList.add('hide');
+
+                    setTimeout(() => {
+                        panel.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 250);
+                }
+            }
+        </script>
+
+
+        <!-- 6 Panel CARDS SECTION -->
+        <section class="max-w-7xl mx-auto px-4 py-16">
+
+            <style>
+                .travel-wrap {
+                    display: grid;
+                    gap: 32px;
+                }
+
+                .travel-item {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                    align-items: start;
+                }
+
+                .travel-main,
+                .travel-desc,
+                .travel-side {
+                    background: #fff;
+                    border-radius: 24px;
+                    overflow: hidden;
+                    box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+                }
+
+                .travel-main {
+                    cursor: pointer;
+                }
+
+                .travel-main img {
+                    width: 100%;
+                    height: 230px;
+                    object-fit: cover;
+                }
+
+                .travel-desc {
+                    padding: 24px;
+                    line-height: 1.7;
+                }
+
+                .travel-desc.hide {
+                    display: none;
+                }
+
+                .travel-side {
+                    max-height: 0;
+                    opacity: 0;
+                    overflow: hidden;
+                    padding: 0 24px;
+                    transition: all .45s ease;
+                }
+
+                .travel-side.show {
+                    max-height: 2200px;
+                    opacity: 1;
+                    padding: 24px;
+                }
+
+                .tour-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                    gap: 20px;
+                }
+
+                .tour-card {
+                    background: #fff;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+                }
+
+                .tour-card img {
+                    width: 100%;
+                    height: 180px;
+                    object-fit: cover;
+                }
+
+                .tour-card .content {
+                    padding: 18px;
+                }
+
+                @media (min-width: 1024px) {
+                    .travel-item {
+                        grid-template-columns: 360px 1fr;
+                        gap: 28px;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .travel-wrap {
+                        gap: 24px;
+                    }
+
+                    .travel-desc,
+                    .travel-side {
+                        padding: 18px;
+                    }
+
+                    .tour-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
+
+            <script>
+                function openPlace(id, descId) {
+                    const panels = document.querySelectorAll('.travel-side');
+                    const descs = document.querySelectorAll('.travel-desc');
+
+                    const panel = document.getElementById(id);
+                    const desc = document.getElementById(descId);
+
+                    const isOpen = panel.classList.contains('show');
+
+                    panels.forEach(item => item.classList.remove('show'));
+                    descs.forEach(item => item.classList.remove('hide'));
+
+                    if (!isOpen) {
+                        panel.classList.add('show');
+                        desc.classList.add('hide');
+                    }
+                }
+            </script>
+
+            <div class="travel-wrap">
+
+                <!-- CARD 1 Siem Reap-->
+                <div class="travel-item reveal">
+
+                    <div class="travel-main" onclick="openPlace('siemPanel','siemDesc')">
+                        <img src="imgs/c-angkorwat.jpeg" class="h-56 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-black">Siem Reap</h3>
+                            <p class="text-emerald-600 text-sm mt-1">Temple Kingdom</p>
+                            <p class="mt-2 text-gray-600">Ancient wonders, culture, and magical sunrise moments.</p>
+                        </div>
+                    </div>
+
+                    <!-- Siem Reap Paragraph -->
+                    <div id="siemDesc" class="travel-desc">
+                        <p class="text-black">
+                            <span class="text-2xl font-bold">Siem Reap</span>: The Gateway to Antiquity
+                            Siem Reap is the cultural heartbeat of Cambodia, where the grandeur of the ancient Khmer
+                            Empire meets a bustling, modern hospitality scene. As home to the legendary Angkor
+                            Archaeological Park, it offers a journey back in time through towering stone faces and
+                            intricate bas-reliefs. Beyond the temples, the province charms visitors with its floating
+                            villages on the Tonle Sap, vibrant night markets, and a world-class dining scene. It is a
+                            place of profound spirituality and artistic heritage, perfect for those seeking both
+                            inspiration and adventure.
+                        </p>
+                    </div>
+
+                    <div id="siemPanel" class="travel-side">
+
+                        <!-- 3 sub card -->
+                        <div class="tour-grid">
+
+                            <div class="tour-card">
+                                <img src="imgs/s-angkorwat.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Angkor Sunrise</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location</b>: 5km North of Siem Reap</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 5:00AM -> 5:30 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> The world's largest
+                                        religious monument.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-pd.png">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Preah Dak Villages</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Near East Baray</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 6:00 AM – 6:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Famous for handmade palm
+                                        sugar and Khmer noodles.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-km.jpeg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Kulen Mountain</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: 50km North of the city</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 7:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Birthplace of the Khmer
+                                        Empire with underwater carvings.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CARD 2 Phnom Penh-->
+                <div class="travel-item reveal">
+
+                    <div class="travel-main" onclick="openPlace('ppPanel','ppDesc')">
+                        <img src="imgs/c-pp.jpg" class="h-56 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-black">Phnom Penh</h3>
+                            <p class="text-emerald-600 text-sm mt-1">Capital Energy</p>
+                            <p class="mt-2 text-gray-600">History, skyline, food, and city lifestyle.</p>
+                        </div>
+                    </div>
+
+                    <!-- PP Paragraph -->
+                    <div id="ppDesc" class="travel-desc">
+                        <p class="text-black">
+                            <span class="text-2xl font-bold">Phnom Penh:</span> The Pearl of Asia
+                            Phnom Penh is a captivating city of contrasts, where gold-roofed pagodas sit alongside sleek
+                            skyscrapers and French colonial villas. Located at the "Chaktomuk" (the four faces)
+                            confluence of the Mekong and Tonle Sap rivers, the capital is a hub of energy, history, and
+                            resilience. From the sobering history of Tuol Sleng to the regal elegance of the Royal
+                            Palace, the city tells the story of a nation that has overcome its past to embrace a vibrant
+                            future. It is the best place to experience Cambodia’s urban evolution, riverside strolls,
+                            and sophisticated nightlife.
+                        </p>
+                    </div>
+
+                    <div id="ppPanel" class="travel-side">
+                        <!-- 3 sub card -->
+                        <div class="tour-grid">
+
+                            <div class="tour-card">
+                                <img src="imgs/s-royalpalace.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Royal Palace</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location</b>: Sothearos Blvd, Phnom Penh
+                                    </p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 8:00 AM – 11:00 AM / 2:00 PM –
+                                        5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> The official residence of
+                                        the King of Cambodia and a stunning example of Khmer architecture.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-tsl.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Tuol Sleng Museum (S-21)</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Sangkat BKK3</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 8:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Preserved former high
+                                        school turned secret prison.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-nkm.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">National Museum</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Next to the Royal Palace</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 8:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> The finest collection of
+                                        ancient Khmer sculpture.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CARD 3 Sihanouk Ville-->
+                <div class="travel-item reveal">
+
+                    <div class="travel-main" onclick="openPlace('seaPanel','seaDesc')">
+                        <img src="imgs/c-kohrong.jpeg" class="h-56 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-black">Sihanoukville</h3>
+                            <p class="text-emerald-600 text-sm mt-1">Sea Escape</p>
+                            <p class="mt-2 text-gray-600">Island vibes, beaches, and sunset adventures.</p>
+                        </div>
+                    </div>
+
+                    <!-- KPS Paragraph -->
+                    <div id="seaDesc" class="travel-desc">
+                        <p class="text-black">
+                            <span class="text-2xl font-bold">Sihanoukville</span>: The Coastal Frontier
+                            Once a quiet port town, Sihanoukville has transformed into a dynamic gateway to Cambodia’s
+                            most stunning tropical treasures. While the city itself is a fast-growing hub, its true
+                            magic lies in the surrounding coastline and the pristine islands of the Koh Rong
+                            Archipelago. With its turquoise waters, powdery white sands, and lush national parks like
+                            Ream, it is a haven for sun-seekers and water sports enthusiasts. Whether you want to dance
+                            at a beach party or find a secluded bay to watch the sunset, this province offers the
+                            ultimate seaside escape.
+                        </p>
+                    </div>
+
+                    <div id="seaPanel" class="travel-side">
+                        <!-- 3 sub card -->
+                        <div class="tour-grid">
+
+                            <div class="tour-card">
+                                <img src="imgs/s-kr.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Koh Rong</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location</b>: 25km off the coast</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: Ferries run 8:00 AM – 4:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Powder-white sands and
+                                        glowing night plankton.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-ream.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Ream National Park</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Ream National Park</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 8:00 AM – 6:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Secluded coast backed by
+                                        dense mangroves.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-otres.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Otres Beach</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: South of Sihanoukville</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 24/7</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> A famous, laid-back
+                                        bohemian atmosphere.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CARD 4 Ratanakiri-->
+                <div class="travel-item reveal">
+
+                    <div class="travel-main" onclick="openPlace('ratanakPanel','ratanakDesc')">
+                        <img src="imgs/c-byl.jpg" class="h-56 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-black">Ratanakiri</h3>
+                            <p class="text-emerald-600 text-sm mt-1">Wild Nature</p>
+                            <p class="mt-2 text-gray-600">Lakes, forests, waterfalls, and adventure.</p>
+                        </div>
+                    </div>
+                    <!-- Ratanakiri Paragraph -->
+                    <div id="ratanakDesc" class="travel-desc">
+                        <p class="text-black">
+                            <span class="text-2xl font-bold">Ratanakiri</span>: The Wild Highland
+                            For the traveler looking to go off the beaten path, Ratanakiri offers a rugged landscape of
+                            red dirt roads, ancient volcanic lakes, and dense primary rainforests. Located in the remote
+                            northeast, this "gem-stone" province is famous for its natural wonders like the emerald Yeak
+                            Laom Lake and its rich indigenous culture. It is a land of cascading waterfalls and rare
+                            wildlife, providing a raw and authentic experience of Cambodia’s hinterland. Ratanakiri is
+                            the perfect destination for trekkers, nature lovers, and those wanting to connect with the
+                            traditions of the highland tribes.
+                        </p>
+                    </div>
+
+                    <div id="ratanakPanel" class="travel-side">
+                        <!-- 3 sub card -->
+                        <div class="tour-grid">
+
+                            <div class="tour-card">
+                                <img src="imgs/s-byl.png">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Yeak Laom Lake</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location</b>: 5km from Banlung</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 7:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> A 4,000-year-old volcanic
+                                        crater lake.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-kc.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Ka Chanh Waterfall</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: 6km from Banlung</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 7:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Surrounded by rubber
+                                        plantations and suspension bridges.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-vrc.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Virachey National Park</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Border of Laos/Vietnam</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: Best with a guide (Day trips)</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> One of the largest
+                                        protected wildernesses in Cambodia.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CARD 5 Kep-->
+                <div class="travel-item reveal">
+
+                    <div class="travel-main" onclick="openPlace('kepPanel','kepDesc')">
+                        <img src="imgs/c-kep.jpg" class="h-56 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-black">Kep</h3>
+                            <p class="text-emerald-600 text-sm mt-1">Coastal Charm</p>
+                            <p class="mt-2 text-gray-600">Fresh seafood, sea breeze, and peaceful views.</p>
+                        </div>
+                    </div>
+
+                    <!-- Kep Paragraph -->
+                    <div id="kepDesc" class="travel-desc">
+                        <p class="text-black">
+                            <span class="text-2xl font-bold">Kep</span>: The Elegant Retreat
+                            Kep is Cambodia’s most tranquil seaside destination, known for its nostalgic charm and
+                            world-famous seafood. Originally founded as a prestigious retreat for the French elite, the
+                            town is dotted with hauntingly beautiful colonial ruins and lush greenery. It offers a
+                            slower pace of life where the main "event" is choosing a fresh crab at the Crab Market or
+                            taking a short boat ride to the rustic Rabbit Island. With its quiet beaches and scenic
+                            mountain trails, Kep is the ideal sanctuary for those who want to disconnect and rejuvenate
+                            by the sea.
+                        </p>
+                    </div>
+
+                    <div id="kepPanel" class="travel-side">
+                        <!-- 3 sub card -->
+                        <div class="tour-grid">
+
+                            <div class="tour-card">
+                                <img src="imgs/s-kep.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Kep Beach</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location</b>: Kep Town Center</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 24/7</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Calm crescent beach flanked
+                                        by seafood shacks.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-kcm.png">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">The Crab Market</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Waterfront, Kep</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 6:00 AM – 8:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Watch live crabs pulled
+                                        directly from the ocean.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-knp.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Kep National Park</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Behind Kep Town</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: Dawn to Dusk</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> An 8km jungle loop with
+                                        panoramic ocean views.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CARD 6 Kompot-->
+                <div class="travel-item reveal">
+
+                    <div class="travel-main" onclick="openPlace('kampotPanel','kampotDesc')">
+                        <img src="imgs/c-kompot.jpg" class="h-56 w-full object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-black">Kampot</h3>
+                            <p class="text-emerald-600 text-sm mt-1">Riverside Beauty</p>
+                            <p class="mt-2 text-gray-600">Mountains, pepper farms, and calm rivers.</p>
+                        </div>
+                    </div>
+                    <!-- Kampot Paragraph -->
+                    <div id="kampotDesc" class="travel-desc">
+                        <p class="text-black">
+                            <span class="text-2xl font-bold">Kampot</span>: The Riverside Sanctuary
+                            Kampot is a province that invites you to slow down and breathe. Nestled along the banks of
+                            the Praek Tuek Chhu River and framed by the misty Elephant Mountains, it is famous for
+                            producing the world’s best pepper and being a center of salt production. The town is a
+                            masterpiece of colonial architecture, now filled with cozy cafes and boutique stays. From
+                            the eerie heights of Bokor Hill to the glowing fireflies on the river at night, Kampot
+                            offers a perfect blend of mountain air, riverside bliss, and rural beauty.
+                        </p>
+                    </div>
+
+                    <div id="kampotPanel" class="travel-side">
+                        <!-- 3 sub card -->
+                        <div class="tour-grid">
+
+                            <div class="tour-card">
+                                <img src="imgs/s-kbkh.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Bokor Hill Station</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location</b>: Bokor National Park</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 8:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> An eerie, mist-covered
+                                        French colonial ghost town.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-kwtf.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Kampot Waterfall</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Tada/Popokvil area</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 8:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Refreshing jungle pools
+                                        perfect for a hot day.</p>
+                                </div>
+                            </div>
+
+                            <div class="tour-card">
+                                <img src="imgs/s-kpepper.jpg">
+                                <div class="content">
+                                    <h3 class="text-1xl text-emerald-600 font-bold">Kampot Pepper Farm</h3>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Location </b>: Rural Kampot</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Open</b>: 9:00 AM – 5:00 PM</p>
+                                    <p class="text-gray-600 text-sm mt-2"><b>Uniqueness:</b> Certified "champagne of
+                                        pepper" known worldwide.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Carousel + PACKAGE CARDS -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 reveal">
+            <h2 class="text-3xl font-bold text-center mb-10">Popular Places</h2>
+
+            <!-- TOP SECTION -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+
+                <!-- LEFT: CAROUSEL -->
+                <div class="lg:col-span-2">
+                    <div id="default-carousel" class="relative w-full rounded-2xl overflow-hidden shadow-xl"
+                        data-carousel="slide" data-carousel-interval="5000">
+
+                        <div class="relative h-72 md:h-[500px]">
+
+                            <!-- Slide 1 -->
+                            <div class="hidden duration-1000 ease-in-out absolute inset-0" data-carousel-item="active">
+                                <img src="imgs/c-angkorwat.jpeg" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/25">
+
+                                    <div class="flex items-center justify-center h-full">
+                                        <h3 class="text-3xl sm:text-4xl md:text-5xl font-extralight uppercase tracking-[4px] text-transparent"
+                                            style="-webkit-text-stroke:0.8px rgba(255,255,255,0.75);">
+                                            Siem Reap
+                                        </h3>
+                                    </div>
+
+                                    <p
+                                        class="absolute bottom-8 w-full text-center text-sm text-white/70 tracking-[2px] uppercase">
+                                        Angkor Wat
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="hidden duration-1000 ease-in-out absolute inset-0" data-carousel-item>
+                                <img src="imgs/c-pp.jpg" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/25">
+
+                                    <div class="flex items-center justify-center h-full">
+                                        <h3 class="text-3xl sm:text-4xl md:text-5xl font-extralight uppercase tracking-[4px] text-transparent"
+                                            style="-webkit-text-stroke:0.8px rgba(255,255,255,0.75);">
+                                            Phnom Penh
+                                        </h3>
+                                    </div>
+
+                                    <p
+                                        class="absolute bottom-8 w-full text-center text-sm text-white/70 tracking-[2px] uppercase">
+                                        Independence Monument
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="hidden duration-1000 ease-in-out absolute inset-0" data-carousel-item>
+                                <img src="imgs/c-kohrong.jpeg" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/25">
+
+                                    <div class="flex items-center justify-center h-full">
+                                        <h3 class="text-3xl sm:text-4xl md:text-5xl font-extralight uppercase tracking-[4px] text-transparent"
+                                            style="-webkit-text-stroke:0.8px rgba(255,255,255,0.75);">
+                                            Sihanouk Ville
+                                        </h3>
+                                    </div>
+
+                                    <p
+                                        class="absolute bottom-8 w-full text-center text-sm text-white/70 tracking-[2px] uppercase">
+                                        Koh Rong
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <!-- Slide 4 -->
+                            <div class="hidden duration-1000 ease-in-out absolute inset-0" data-carousel-item>
+                                <img src="imgs/c-byl.jpg" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/25">
+
+                                    <div class="flex items-center justify-center h-full">
+                                        <h3 class="text-3xl sm:text-4xl md:text-5xl font-extralight uppercase tracking-[4px] text-transparent"
+                                            style="-webkit-text-stroke:0.8px rgba(255,255,255,0.75);">
+                                            Ratanakiri
+                                        </h3>
+                                    </div>
+
+                                    <p
+                                        class="absolute bottom-8 w-full text-center text-sm text-white/70 tracking-[2px] uppercase">
+                                        Beung Yeak Laom
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <!-- Slide 5 -->
+                            <div class="hidden duration-1000 ease-in-out absolute inset-0" data-carousel-item>
+                                <img src="imgs/c-kep.jpg" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/25">
+
+                                    <div class="flex items-center justify-center h-full">
+                                        <h3 class="text-3xl sm:text-4xl md:text-5xl font-extralight uppercase tracking-[4px] text-transparent"
+                                            style="-webkit-text-stroke:0.8px rgba(255,255,255,0.75);">
+                                            Kep
+                                        </h3>
+                                    </div>
+
+                                    <p
+                                        class="absolute bottom-8 w-full text-center text-sm text-white/70 tracking-[2px] uppercase">
+                                        Beautiful beach
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <!-- Slide 6 -->
+                            <div class="hidden duration-1000 ease-in-out absolute inset-0" data-carousel-item>
+                                <img src="imgs/c-kompot.jpg" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/25">
+
+                                    <div class="flex items-center justify-center h-full">
+                                        <h3 class="text-3xl sm:text-4xl md:text-5xl font-extralight uppercase tracking-[4px] text-transparent"
+                                            style="-webkit-text-stroke:0.8px rgba(255,255,255,0.75);">
+                                            Kompot
+                                        </h3>
+                                    </div>
+
+                                    <p
+                                        class="absolute bottom-8 w-full text-center text-sm text-white/70 tracking-[2px] uppercase">
+                                        Hidden Beauty of Phnom Bokor
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: 3 CARDS -->
+                <div class="grid gap-5 h-full">
+
+                    <!-- FunFact section -->
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5 mb-5">
+                        <h3 class="text-xl font-bold mb-2">Siem Reap</h3>
+                        <p class="text-gray-300 text-sm mb-3 leading-5">
+                            <span class="text-1xl text-emerald-600 font-bold">FunFact :</span> The name "Siem Reap"
+                            literally translates to "Siam Defeated," commemorating a 16th-century Khmer victory over the
+                            Thai (Siam) army. It’s also home to the world’s largest religious monument—Angkor Wat!
+                        </p>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5 mb-5">
+                        <h3 class="text-xl font-bold mb-2">Phnom Penh</h3>
+                        <p class="text-gray-300 text-sm mb-3">
+                            <span class="text-1xl text-emerald-600 font-bold">FunFact :</span> The city was named after
+                            a wealthy woman named Lady Penh. Legend says she found four Buddha statues in a floating
+                            tree and built a hill (Phnom) and a temple (Wat Phnom) to house them.
+                        </p>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5">
+                        <h3 class="text-xl font-bold mb-2">Sihanouk Ville</h3>
+                        <p class="text-gray-300 text-sm mb-3">
+                            <span class="text-1xl text-emerald-600 font-bold">FunFact :</span> The city was built in the
+                            1950s as Cambodia’s only deep-sea port. It was named after King Norodom Sihanouk, who is
+                            fondly remembered as the "Father of Independence."
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- BOTTOM EXTRA 3 CARDS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5">
+                    <h3 class="text-xl font-bold mb-2">Rattanakiri</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        <span class="text-1xl text-emerald-600 font-bold">FunFact :</span> The name comes from the
+                        Sanskrit words Ratna (Gem) and Kiri (Mountain). It is literally the "Gem Mountain" province,
+                        famous for its rare blue zircons and volcanic soil.
+                    </p>
+
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5">
+                    <h3 class="text-xl font-bold mb-2">Kep</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        <span class="text-1xl text-emerald-600 font-bold">FunFact :</span> Kep is the smallest province
+                        in Cambodia! It was once the most prestigious beach resort for the French and Khmer elite,
+                        earning the nickname "The Saint-Tropez of Southeast Asia."
+                    </p>
+
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5">
+                    <h3 class="text-xl font-bold mb-2">Kompot</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        <span class="text-1xl text-emerald-600 font-bold">FunFact :</span> Kampot Pepper was the first
+                        Cambodian product to receive "Geographical Indication" (GI) status—the same protection given to
+                        Champagne in France. It is widely considered by top chefs to be the best pepper in the world!
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- FAQS -->
+        <section class="py-16 px-4 sm:px-6 reveal">
+            <div class="max-w-3xl mx-auto">
+
+                <!-- Title -->
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl sm:text-5xl font-bold text-gray-900 dark:text-white">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="mt-3 text-gray-500 dark:text-gray-400">
+                        Everything you need to know before coming to Cambodia.
+                    </p>
+                </div>
+
+                <!-- FAQ Items -->
+                <div class="space-y-4">
+
+                    <details
+                        class="group bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="text-lg font-semibold text-gray-900 dark:text-white">
+                                Do I need a visa to visit Cambodia?
+                            </span>
+                            <svg class="w-5 h-5 text-emerald-600 transition-transform duration-300 group-open:rotate-180"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </summary>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Most travelers need a visa. If you're from an ASEAN country, you can enter
+                            visa-free for 14–30 days. For everyone else, you can easily apply for an E-Visa online ($36)
+                            or get a Visa on Arrival ($30) at the airport.
+                            <br>
+                            Pro Tip: As of 2026, don't forget to complete your e-Arrival Card online within 7 days
+                            before you land!
+                        </p>
+                    </details>
+
+                    <details
+                        class="group bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="text-lg font-semibold text-gray-900 dark:text-white">
+                                What currency should I bring?
+                            </span>
+                            <svg class="w-5 h-5 text-emerald-600 transition-transform duration-300 group-open:rotate-180"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </summary>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Cambodia uses a unique dual-currency system: US Dollars (USD) and Cambodian Riel
+                            (KHR). Both are accepted everywhere!
+                            <br>
+                            $1 is roughly equal to 4,000 Riel. You’ll often pay in dollars and receive your
+                            "small change" back in Riel.
+                            <br>
+                            Pro Tip: Make sure your US bills are crisp and clean—banks and shops may not accept torn or
+                            old notes.
+                        </p>
+                    </details>
+
+                    <details
+                        class="group bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="text-lg font-semibold text-gray-900 dark:text-white">
+                                How do I get around the cities?
+                            </span>
+                            <svg class="w-5 h-5 text-emerald-600 transition-transform duration-300 group-open:rotate-180"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </summary>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                            The easiest and most fun way is by Tuk-Tuk! To get the best price without
+                            haggling, download the Grab or PassApp mobile apps.
+                            <br>
+                            Most short rides in the city cost between $1 and $3. It’s safe, fast, and gives
+                            you a front-row seat to the local life.
+                        </p>
+                    </details>
+
+                    <details
+                        class="group bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-200 dark:border-gray-700">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="text-lg font-semibold text-gray-900 dark:text-white">
+                                Is there a dress code for the temples?
+                            </span>
+                            <svg class="w-5 h-5 text-emerald-600 transition-transform duration-300 group-open:rotate-180"
+                                fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </summary>
+                        <p class="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Yes! Cambodia is a deeply respectful culture. When visiting sacred sites like
+                            Angkor Wat or the Royal Palace, you must cover your shoulders and knees.
+                            <br>
+                            Note: Wearing a shawl or scarf over a tank top is sometimes rejected by guards—it’s best to
+                            wear a T-shirt and long pants or a long skirt to ensure entry.
+                        </p>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-950 text-gray-300 reveal mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+                    <!-- Brand -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Angkor Travels</h3>
+                        <p class="text-sm leading-7 text-gray-400">
+                            Discover Cambodia through premium tours, authentic experiences,
+                            and unforgettable memories with trusted local guides.
+                        </p>
+                    </div>
+
+                    <!-- Links -->
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Explore</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="#" class="hover:text-emerald-400 transition">Home</a></li>
+                            <li><a href="#explore" class="hover:text-emerald-400 transition">Destinations</a></li>
+                            <li><a href="#" class="hover:text-emerald-400 transition">Tours</a></li>
+                            <li><a href="#" class="hover:text-emerald-400 transition">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Contact</h4>
+                        <ul class="space-y-3 text-sm text-gray-400">
+                            <li>📍 Phnom Penh, Cambodia</li>
+                            <li>📞 +855 23 456 789</li>
+                            <li>✉ hello@angkortravels.com</li>
+                            <li>🕒 Daily: 10:00 AM – 10:00 PM</li>
+                        </ul>
+                    </div>
+
+                    <!-- Social -->
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Follow Us</h4>
+                        <div class="flex gap-3">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-800 hover:bg-emerald-600 transition flex items-center justify-center">f</a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-800 hover:bg-emerald-600 transition flex items-center justify-center">in</a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-gray-800 hover:bg-emerald-600 transition flex items-center justify-center">ig</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="border-t border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">
+                    © 2026 Angkor Travels. Crafted for explorers of the Kingdom of Wonder.
+                </div>
+
+            </div>
+        </footer>
+
+
+        <!-- Smooth Scroll -->
+        <script>
+            const hero = document.getElementById("hero-bg");
+            let ticking = false;
+
+            window.addEventListener("scroll", () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        if (hero) {
+                            hero.style.transform = `translate3d(0, ${scrollY * 0.35}px, 0)`;
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+
+            // navbar script
+            const menuBtn = document.getElementById("menuBtn");
+            const mobileMenu = document.getElementById("mobileMenu");
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener("click", () => {
+                    mobileMenu.classList.toggle("hidden");
+                });
+            }
+
+            // NavBar script when the navbar goes pass explore section
+            const navbar = document.getElementById("navbar");
+            const explore = document.getElementById("explore");
+
+            function toggleNavbar() {
+                if (!navbar || !explore) return;
+
+                const triggerPoint = explore.offsetTop - 120;
+
+                if (window.scrollY > triggerPoint) {
+                    navbar.classList.remove("-translate-y-full", "opacity-0");
+                    navbar.classList.add("translate-y-0", "opacity-100");
+                } else {
+                    navbar.classList.add("-translate-y-full", "opacity-0");
+                    navbar.classList.remove("translate-y-0", "opacity-100");
+                }
+            }
+
+            window.addEventListener("scroll", toggleNavbar, { passive: true });
+            toggleNavbar();
+        </script>
+</body>
+
+</html>
