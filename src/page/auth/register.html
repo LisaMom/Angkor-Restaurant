@@ -1,12 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register page</title>
-    <link rel="stylesheet" href="../../css/output.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+      display: none;
+    }
+  </style>  
 </head>
 <body>
-    
+  <div x-data="authPage()" class="min-h-screen bg-gray-100">
+    <!-- Auth Pages -->
+    <div class="min-h-screen flex">
+      <!-- Left Side - Auth Forms -->
+    <div class="flex justify-center items-center min-h-screen bg-white w-full lg:w-1/2 p-8 ">
+      <div class="w-full flex items-center justify-center ">
+        <div class="w-3/4 max-w-md p-8  bg-white rounded-2xl shadow-xl ">
+          <h2 class="text-2xl font-bold text-blue-600 mb-6">Sign up</h2>
+          <form>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm mb-2">
+                Username<span style="color: red;">*</span>
+              </label>
+              <input
+                type="text"
+                name="username"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
+                placeholder="Maria"
+              />
+            </div>
+
+           <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email <span style="color: red;">*</span></label>
+                <div class="relative">
+                  <input
+                    type="email"
+                    x-model="email"
+                    required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
+                    placeholder="you@example.com"
+                  />
+                  <i class="fas fa-envelope absolute right-2 top-4 w-6 h-6 text-gray-400"></i>
+                </div>
+              </div>
+
+           <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Password<span style="color: red;">*</span></label>
+                <div class="relative">
+                  <input
+                    :type="showPassword ? 'text' : 'password'"
+                    x-model="password"
+                    required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
+                    placeholder="••••••••"
+                  />
+                  <i class="fa-solid fa-lock absolute right-2 top-4 w-6 h-6 text-gray-400"></i>
+                </div>
+                <p x-show="password && !validatePassword(password)" class="mt-2 text-sm text-blue-600">Password must be at least 8 characters</p>
+              </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Password<span style="color: red;">*</span></label>
+                <div class="relative">
+                  <input
+                    :type="showPassword ? 'text' : 'password'"
+                    x-model="password"
+                    required
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
+                    placeholder="••••••••"
+                  />
+                  <i class="fa-solid fa-lock absolute right-2 top-4 w-6 h-6 text-gray-400"></i>
+                </div>
+                <p x-show="password && !validatePassword(password)" class="mt-2 text-sm text-blue-600">Password must be at least 8 characters</p>
+              </div>
+   <button
+                type="submit"
+                class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                :disabled="
+                  loading ||
+                  (email && !validateEmail(email)) ||
+                  (password && !validatePassword(password)) ||
+                  (!isLogin && confirmPassword && !validateConfirmPassword())
+                "
+              >
+                <span x-show="loading" class="inline-flex items-center">
+                  <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Processing...
+                </span>
+                <span x-show="!loading" x-text="isLogin ? 'Sign Up' : 'Create Account'"></span>
+              </button>
+          </form>
+          <button class="w-full mt-4 border border-gray-300 py-2 rounded-lg flex items-center justify-center hover:bg-gray-100 transition">
+            <img
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              alt="Google"
+              class="w-5 h-7 mr-2 "
+            />
+            Sign-up with Google
+          </button>
+
+          <p class="mt-6 text-sm text-center text-gray-600">
+            Already have an account?
+            <a href="/src/page/auth/login.html" class="text-blue-600 hover:underline">
+              Sign in
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+      <!-- Right Side - Image -->
+      <div
+        class="hidden lg:block lg:w-1/2 bg-cover bg-center"
+        style="background-image: url('https://img.freepik.com/premium-photo/joyful-road-trip-through-lush-mountains_332713-6651.jpg?semt=ais_incoming&w=740&q=80')"
+      >
+        <div class="h-full bg-black bg-opacity-50 flex items-center justify-center">
+          <div class="text-center text-white px-12">
+            <h2 class="text-4xl font-bold mb-6">Let's Trip Together</h2>
+            <p class="text-xl">Pack your bags and find your tribe. Register now to plan, share, and experience the ultimate Cambodian road trip.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('authPage', () => ({
+        isLogin: true,
+        showPassword: false,
+        showConfirmPassword: false,
+        email: '',
+        password: '',
+        confirmPassword: '',
+        name: '',
+        loading: false,
+
+        validateEmail(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+
+        validatePassword(password) {
+          return password.length >= 8;
+        },
+
+        validateConfirmPassword() {
+          return this.password === this.confirmPassword;
+        },
+
+        handleSubmit() {
+          this.loading = true;
+          // Simulate API call
+          setTimeout(() => {
+            this.loading = false;
+            alert(this.isLogin ? 'Logged in successfully!' : 'Registered successfully!');
+          }, 1500);
+        }
+      }));
+    });
+  </script>
 </body>
 </html>
