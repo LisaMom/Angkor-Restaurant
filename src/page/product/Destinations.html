@@ -1,12 +1,1535 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Destinations page</title>
-    <link rel="stylesheet" href="../../css/output.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cambodia Destinations — Wanderlust</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Replace the line below with your own output.css link -->
+  <!-- <link rel="stylesheet" href="../src/output.css"> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Inter', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            sand: {
+              50:  '#fdf8f0',
+              100: '#f9eedc',
+              200: '#f2dab8',
+              300: '#e8c08a',
+              400: '#dc9f57',
+              500: '#d4853a',
+              600: '#c66d2f',
+              700: '#a55327',
+              800: '#854227',
+              900: '#6c3723',
+            },
+            slate: {
+              850: '#1a2236',
+              950: '#0d1321',
+            }
+          },
+          animation: {
+            'fade-up':   'fadeUp 0.7s ease forwards',
+            'fade-in':   'fadeIn 0.6s ease forwards',
+            'float':     'float 6s ease-in-out infinite',
+            'ken-burns': 'kenBurns 18s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%':   { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%':   { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%':      { transform: 'translateY(-12px)' },
+            },
+            kenBurns: {
+              '0%':   { transform: 'scale(1) translate(0%, 0%)' },
+              '100%': { transform: 'scale(1.12) translate(-2%, -1%)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .font-display { font-family: 'Inter', sans-serif; }
+
+    /* ── Grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── Hero ── */
+    .hero-bg {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      animation: kenBurns 18s ease-in-out infinite alternate;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,19,33,0.55) 0%,
+        rgba(13,19,33,0.20) 45%,
+        rgba(13,19,33,0.80) 100%
+      );
+    }
+
+    /* ── Nav link underline ── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 1.5px;
+      background: #d4853a;
+      transition: width 0.3s ease;
+      margin-top: 2px;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after { width: 100%; }
+
+    /* ── Toggle ── */
+    .toggle-track  { transition: background 0.3s ease; }
+    .toggle-thumb  { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+
+    /* ── Search glass ── */
+    .search-glass {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Global scale-up ── */
+    html { font-size: 19px; }
+    p, li, a, span, input, button, label { font-size: inherit; }
+    .text-sm   { font-size: 1rem    !important; }
+    .text-xs   { font-size: 0.88rem !important; }
+    .text-base { font-size: 1.15rem !important; }
+    .text-lg   { font-size: 1.3rem  !important; }
+    .text-xl   { font-size: 1.5rem  !important; }
+    .text-2xl  { font-size: 1.8rem  !important; }
+    .text-3xl  { font-size: 2.2rem  !important; }
+    .text-4xl  { font-size: 2.8rem  !important; }
+    .text-5xl  { font-size: 3.6rem  !important; }
+
+    /* ── Scale up images & cards ── */
+    .dest-card .card-img-wrap { height: 240px !important; }
+    img { transform-origin: center; }
+    .h-44 { height: 13rem !important; }
+    .h-80 { height: 26rem !important; }
+    .h-96 { height: 32rem !important; }
+    .w-10 { width: 3rem !important; }
+    .h-10 { height: 3rem !important; }
+    .rounded-2xl { border-radius: 1.2rem !important; }
+    .rounded-3xl { border-radius: 1.6rem !important; }
+    .p-7 { padding: 2.2rem !important; }
+    .p-6 { padding: 1.8rem !important; }
+    .gap-6 { gap: 1.8rem !important; }
+    .gap-10 { gap: 2.8rem !important; }
+    .max-w-7xl { max-width: 90rem !important; }
+
+    /* ── Destination cards ── */
+    .dest-card { transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.35s ease; }
+    .dest-card:hover { transform: translateY(-8px) scale(1.01); }
+    .dest-card .card-img { transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .dest-card:hover .card-img { transform: scale(1.08); }
+
+    /* ── Card stagger ── */
+    .card-1  { animation: fadeUp 0.6s ease 0.05s both; }
+    .card-2  { animation: fadeUp 0.6s ease 0.12s both; }
+    .card-3  { animation: fadeUp 0.6s ease 0.19s both; }
+    .card-4  { animation: fadeUp 0.6s ease 0.26s both; }
+    .card-5  { animation: fadeUp 0.6s ease 0.33s both; }
+    .card-6  { animation: fadeUp 0.6s ease 0.40s both; }
+    .card-7  { animation: fadeUp 0.6s ease 0.47s both; }
+    .card-8  { animation: fadeUp 0.6s ease 0.54s both; }
+    .card-9  { animation: fadeUp 0.6s ease 0.61s both; }
+
+    /* ── Category pill ── */
+    .cat-pill.active { background: #d4853a; color: white; border-color: #d4853a; }
+
+    /* ── Testi card border glow ── */
+    .testi-card { position: relative; overflow: hidden; }
+    .testi-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(212,133,58,0.5), transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ── Stars ── */
+    .stars { color: #d4853a; letter-spacing: 2px; }
+
+    /* ── Region badge ── */
+    .region-badge {
+      background: linear-gradient(135deg, rgba(212,133,58,0.18), rgba(212,133,58,0.06));
+      border: 1px solid rgba(212,133,58,0.35);
+    }
+
+    /* ── Floating orbs ── */
+    .orb { filter: blur(80px); border-radius: 9999px; position: absolute; pointer-events: none; }
+
+    /* ── Map strip section ── */
+    .map-strip {
+      background-image:
+        linear-gradient(to right, rgba(13,19,33,0.96) 0%, rgba(13,19,33,0.70) 55%, rgba(13,19,33,0.35) 100%),
+        url('https://images.unsplash.com/photo-1600093112130-3d5b1a0f7b0a?w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* ── Highlight card ── */
+    .highlight-ring {
+      box-shadow: 0 0 0 2px rgba(212,133,58,0.5), 0 20px 60px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
-<body>
-    
+
+<body class="bg-sand-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300 text-[19px]">
+
+
+  <!-- ══════════════════════ NAVBAR ══════════════════════ -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="../index.html" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-full bg-sand-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12zm-1-5h2v2H9v-2zm0-6h2v4H9V5z"/>
+          </svg>
+        </div>
+        <span class="font-display text-2xl font-semibold text-white drop-shadow-md tracking-wide">Angkor-Travels</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden md:flex items-center gap-8">
+        <li><a href="../index.html" class="nav-link text-white/80 hover:text-white text-sm font-medium tracking-wide drop-shadow transition-colors">Home</a></li>
+        <li><a href="Destinations.html" class="nav-link active text-white text-sm font-medium tracking-wide drop-shadow">Destinations</a></li>
+        <li><a href="detail.html" class="nav-link text-white/80 hover:text-white text-sm font-medium tracking-wide drop-shadow transition-colors">About</a></li>
+        <li><a href="contact.html" class="nav-link text-white/80 hover:text-white text-sm font-medium tracking-wide drop-shadow transition-colors">Contact</a></li>
+      </ul>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-4">
+
+        <!-- Dark/Light Toggle -->
+        <button id="themeToggle" aria-label="Toggle dark mode"
+          class="relative w-14 h-7 rounded-full toggle-track bg-white/20 dark:bg-slate-700 border border-white/30 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sand-400">
+          <span id="toggleThumb"
+            class="toggle-thumb absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-xs dark:translate-x-7">
+            <svg class="w-3.5 h-3.5 text-sand-500 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.78a1 1 0 011.42 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71zm-9.86 0l.71.71A1 1 0 115.65 5.9l-.71-.71A1 1 0 014.36 3.78zM10 5a5 5 0 100 10A5 5 0 0010 5zm8 4h-1a1 1 0 110-2h1a1 1 0 110 2zm-14 0H3a1 1 0 110-2h1a1 1 0 110 2zm10.95 4.95a1 1 0 011.42 0l.71.71a1 1 0 11-1.42 1.42l-.71-.71a1 1 0 010-1.42zm-10.32 0a1 1 0 010 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71a1 1 0 011.42 0zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"/>
+            </svg>
+            <svg class="w-3.5 h-3.5 text-slate-700 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+          </span>
+        </button>
+
+        <a href="auth.html" class="hidden md:block text-sm font-medium text-orange-300 hover:text-orange-500 transition-colors drop-shadow">Sign in</a>
+
+        <button id="menuBtn" class="md:hidden text-white" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 space-y-4">
+      <a href="../index.html" class="block text-white/70 hover:text-white transition-colors">Home</a>
+      <a href="Destinations.html" class="block text-white font-medium">Destinations</a>
+      <a href="detail.html" class="block text-white/70 hover:text-white transition-colors">Trips</a>
+      <a href="contact.html" class="block text-white/70 hover:text-white transition-colors">Contact</a>
+      <div class="pt-4 border-t border-white/10 flex gap-3">
+        <a href="auth.html" class="flex-1 text-center py-2.5 rounded-full border border-white/30 text-white text-sm">Sign</a>
+    </div>
+  </header>
+
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="hero-bg min-h-screen flex flex-col items-center justify-center relative">
+
+    <!-- Ken-Burns background image -->
+    <img
+      src="https://i.pinimg.com/1200x/bd/22/a4/bd22a48b021a57943feb237cd2d70d7b.jpg"
+      alt="Angkor Wat at sunrise"
+      class="hero-img"
+    />
+    <div class="hero-overlay"></div>
+
+    <!-- Floating orbs -->
+    <div class="orb w-72 h-72 bg-sand-400/15 top-1/4 left-6 animate-float"></div>
+    <div class="orb w-96 h-96 bg-amber-600/10 bottom-1/3 right-10 animate-float" style="animation-delay:-3s"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col items-center px-4 text-center">
+
+      <!-- Badge -->
+      <div class="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white/90 text-xs font-medium tracking-widest uppercase animate-fade-in">
+        <span class="w-1.5 h-1.5 rounded-full bg-sand-400 animate-pulse"></span>
+        Kingdom of Wonder · Southeast Asia
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white leading-none tracking-tight drop-shadow-2xl animate-fade-up" style="animation-delay:0.1s">
+        Discover <em class="italic text-sand-300">Cambodia</em>
+      </h1>
+      <p class="mt-5 text-orange-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed animate-fade-up font-bold" style="animation-delay:0.2s">
+        Where ancient temples rise from jungle mist, emerald coastlines remain unspoiled, and the warmth of Khmer hospitality changes you forever.
+      </p>
+
+      <!-- Search bar -->
+      <div class="mt-10 w-full max-w-2xl animate-fade-up" style="animation-delay:0.35s">
+        <div class="search-glass rounded-2xl p-2 flex flex-col sm:flex-row gap-2">
+          <div class="flex items-center gap-3 flex-1 px-4 py-2">
+            <svg class="w-4 h-4 text-white/60 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <input type="text" placeholder="Search Cambodia destinations…" class="bg-transparent text-white placeholder-white/50 text-sm w-full focus:outline-none"/>
+          </div>
+          <div class="hidden sm:block w-px bg-white/20 my-2"></div>
+          <div class="flex items-center gap-3 px-4 py-2 sm:w-36">
+            <svg class="w-4 h-4 text-white/60 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <input type="text" placeholder="Any date" class="bg-transparent text-white placeholder-white/50 text-sm w-full focus:outline-none"/>
+          </div>
+          <button class="px-6 py-3 rounded-xl bg-sand-500 hover:bg-sand-600 text-white text-sm font-semibold shadow-lg transition-all duration-200 hover:shadow-sand-500/40 active:scale-95 flex items-center gap-2 justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+            Explore
+          </button>
+        </div>
+        <!-- Quick Tags -->
+        <div class="flex flex-wrap gap-2 mt-4 justify-center">
+          <span class="text-white/50 text-xs font-medium">Popular:</span>
+          <a href="#angkor" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Angkor Wat |</a>
+          <a href="#phnom-penh" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Phnom Penh |</a>
+          <a href="#koh-rong" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Koh Rong |</a>
+          <a href="#kampot" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Kampot |</a>
+          <a href="#temples" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Hidden Temples |</a>
+          <a href="#hidden-beaches" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Secret Islands |</a>
+          <a href="#culture" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Food &amp; Culture |</a>
+          <a href="#northeast" class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors">| Wild Northeast |</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center z-10">
+      <div class="flex items-center gap-8 sm:gap-16 text-white/80 animate-fade-up" style="animation-delay:0.5s">
+        <div class="text-center">
+          <div class="font-display text-3xl sm:text-4xl font-semibold text-white">24<span class="text-sand-400">+</span></div>
+          <div class="text-xs tracking-widest uppercase mt-0.5 text-white/50">Destinations</div>
+        </div>
+        <div class="w-px h-10 bg-white/20"></div>
+        <div class="text-center">
+          <div class="font-display text-3xl sm:text-4xl font-semibold text-white">1000<span class="text-sand-400">+</span></div>
+          <div class="text-xs tracking-widest uppercase mt-0.5 text-white/50">Khmer Temples</div>
+        </div>
+        <div class="w-px h-10 bg-white/20"></div>
+        <div class="text-center">
+          <div class="font-display text-3xl sm:text-4xl font-semibold text-white">4.9<span class="text-sand-400">★</span></div>
+          <div class="text-xs tracking-widest uppercase mt-0.5 text-white/50">Traveler Rating</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-6 right-8 hidden md:flex flex-col items-center gap-1.5 text-white/40 z-10">
+      <span class="text-xs tracking-widest uppercase rotate-90 origin-center mb-6">Scroll</span>
+      <div class="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ INTRO STRIP ══════════════════════ -->
+  <section class="py-16 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal">
+        <div>
+          <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">The Kingdom of Wonder</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 mb-4 dark:text-white leading-tight">
+            A civilization reborn <em class="italic">in jungle gold</em>
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4">
+            Cambodia is one of Southeast Asia's most extraordinary countries — a land where ancient Khmer empires left behind temples of jaw-dropping scale, where rice paddies shimmer at dusk, and where turquoise islands remain almost impossibly pristine.
+          </p>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6">
+            From the spiritual magnitude of Angkor Wat to the buzzing riverfront streets of Phnom Penh, from pepper plantations in Kampot to the sun-bleached sands of the Cardamom Coast — Cambodia rewards the curious traveller at every turn.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="region-badge px-4 py-2 rounded-full text-sand-700 dark:text-sand-400 text-xs font-semibold">UNESCO Heritage</span>
+            <span class="region-badge px-4 py-2 rounded-full text-sand-700 dark:text-sand-400 text-xs font-semibold">Pristine Islands</span>
+            <span class="region-badge px-4 py-2 rounded-full text-sand-700 dark:text-sand-400 text-xs font-semibold">Khmer Cuisine</span>
+            <span class="region-badge px-4 py-2 rounded-full text-sand-700 dark:text-sand-400 text-xs font-semibold"> Jungle Trekking</span>
+          </div>
+        </div>
+        <!-- Grid of 4 mini images -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-2xl overflow-hidden h-44 shadow-md">
+            <img src="https://i.pinimg.com/1200x/ad/81/c2/ad81c2ba74066da0b0ff9471b2d95abe.jpg" alt="Angkor detail" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          </div>
+          <div class="rounded-2xl overflow-hidden h-44 shadow-md mt-6">
+            <img src="https://i.pinimg.com/736x/f1/b7/94/f1b7943dd7ca24a3b4c3bf5885e8b93f.jpg" alt="Koh Rong beach" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          </div>
+          <div class="rounded-2xl overflow-hidden h-44 shadow-md -mt-6">
+            <img src="https://i.pinimg.com/736x/e3/40/19/e34019f115f864ce4684703225c35f49.jpg" alt="APSARA" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          </div>
+          <div class="rounded-2xl overflow-hidden h-44 shadow-md">
+            <img src="https://i.pinimg.com/736x/cd/9b/2b/cd9b2bd07bb7f4c2e2c162a5e570974e.jpg" alt="AMOK dish" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ CATEGORIES ══════════════════════ -->
+  <section class="py-12 bg-sand-50 dark:bg-slate-950 transition-colors duration-300 border-y border-sand-100 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-center justify-between mb-6 reveal">
+        <div>
+          <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Filter by experience</span>
+          <h2 class="font-display text-3xl font-semibold mt-1 dark:text-white">Travel Styles</h2>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3 reveal">
+        <button class="cat-pill active px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium transition-all duration-200 hover:border-sand-500">All</button>
+        <button class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500">Temple & History</button>
+        <button class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500">Island & Beach</button>
+        <button class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500">Eco & Jungle</button>
+        <button class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500">City & Culture</button>
+        <button class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500">Food & Markets</button>
+        <button class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500">Luxury</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ FEATURED — ANGKOR WAT ══════════════════════ -->
+  <section id="angkor" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 reveal">
+        <div>
+          <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Must-See</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">Angkor &amp; <em class="italic">Siem Reap</em></h2>
+          <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-md">The greatest archaeological site in Southeast Asia — and far beyond.</p>
+        </div>
+        <a href="detail.html" class="inline-flex items-center gap-2 text-sand-600 dark:text-sand-400 text-sm font-semibold hover:gap-3 transition-all">
+          View full itinerary
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Big feature card — Angkor Wat -->
+        <div class="dest-card card-1 sm:col-span-2 lg:col-span-1 lg:row-span-2 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40 highlight-ring group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-64 lg:h-full min-h-[30rem]">
+            <img src="https://i.pinimg.com/1200x/2a/b5/26/2ab5266cef153a8090b94ba8391fcad3.jpg" alt="Angkor Wat" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold shadow">Featured</span>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="flex items-center gap-1 mb-2">
+                <svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span class="text-white text-xs font-semibold">5.0</span>
+                <span class="text-white/60 text-xs">(1,240 reviews)</span>
+              </div>
+              <h3 class="font-display text-3xl font-semibold text-white">Angkor Wat</h3>
+              <p class="text-white/70 text-sm mt-1 mb-4">The world's largest religious monument — a 12th-century Khmer temple complex that defies imagination at every sunrise.</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-white/60 text-xs">From</span>
+                  <div class="font-display text-2xl font-semibold text-white">$37 <span class="text-sm font-sans font-normal text-white/60">/ person</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angkor Thom -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.1s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://i.pinimg.com/1200x/9c/8c/87/9c8c871608d2a5aaf7288a0debdb6679.jpg" alt="Angkor Thom" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <div class="absolute top-3 right-3">
+              <span class="px-3 py-1 rounded-full bg-amber-600/90 text-white text-xs font-semibold">Historical</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Angkor Thom</h3>
+              <div class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span class="text-sm font-semibold dark:text-white">4.9</span>
+              </div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">The last great capital of the Khmer Empire, presided over by the mesmerizing Bayon temple of smiling stone faces.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$37 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <span class="text-xs text-slate-400">1 day</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ta Prohm -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.15s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://i.pinimg.com/736x/9b/94/4f/9b944f58d3daacb6704dc7eb15472575.jpg" alt="Ta Prohm" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <div class="absolute top-3 right-3">
+              <span class="px-3 py-1 rounded-full bg-green-600/90 text-white text-xs font-semibold">Jungle Temple</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Ta Prohm</h3>
+              <div class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span class="text-sm font-semibold dark:text-white">4.8</span>
+              </div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Known as the "Tomb Raider temple" — colossal strangler figs engulf ancient stone corridors in breathtaking chaos.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$37 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <span class="text-xs text-slate-400">1 days</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ PHNOM PENH ══════════════════════ -->
+  <section id="phnom-penh" class="py-20 bg-sand-50 dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 reveal">
+        <div>
+          <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Capital City</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">Phnom <em class="italic">Penh</em></h2>
+          <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-md">A city of resilience, royal palaces, and river-front life that pulses day and night.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Royal Palace -->
+        <div class="dest-card card-1 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://i.pinimg.com/736x/40/cd/70/40cd70a47146d22aa4bede839802fdb2.jpg" alt="Royal Palace Phnom Penh" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-500/90 text-white text-xs font-semibold">Royal</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Royal Palace</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.9</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Golden spires, manicured courtyards, and the dazzling Silver Pagoda house Cambodia's most sacred Buddha images.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$10 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <span class="text-xs text-slate-400">1 day</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- National Museum -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.1s">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://i.pinimg.com/736x/d2/36/82/d2368275bd2154ac1b2e3473f40980cd.jpg" alt="National Museum" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-red-600/90 text-white text-xs font-semibold">Museum</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">National Museum</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.7</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Cambodia's largest museum of cultural history, housing exquisite Khmer art spanning 1,000 years of sculpture and ceramics.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$10 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <span class="text-xs text-slate-400">1 day</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Riverside & Night Market -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.15s">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://www.khmertimeskh.com/wp-content/uploads/2025/06/Walk-Street.jpg" alt="Phnom Penh riverside" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-purple-600/90 text-white text-xs font-semibold">Nightlife</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Riverside &amp; Walk street</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.6</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Sunset cocktails along the Tonle Sap confluence, street food stalls overflowing with local flavours, and buzzing riverside bars.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">Free to visit <span class="text-xs font-sans font-normal text-slate-400"></span></div>
+              <span class="text-xs text-slate-400"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ ISLANDS & COAST ══════════════════════ -->
+  <section id="koh-rong" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 reveal">
+        <div>
+          <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Coastline &amp; Islands</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">The <em class="italic">Cambodian Riviera</em></h2>
+          <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-md">Turquoise waters, bioluminescent plankton, and islands that still feel like secrets.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Koh Rong – large -->
+        <div class="dest-card card-1 sm:col-span-2 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-72 sm:h-80">
+            <img src="https://i.pinimg.com/736x/98/d4/79/98d479f595cc5cc3c7d562ab04059f3e.jpg" alt="Koh Rong" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold shadow">Editor's Pick</span>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="flex items-center gap-1 mb-2"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-white text-xs font-semibold">4.9</span><span class="text-white/60 text-xs">(876 reviews)</span></div>
+              <h3 class="font-display text-3xl font-semibold text-white">Koh Rong Island</h3>
+              <p class="text-white/70 text-sm mt-1 mb-4">Cambodia's paradise island — long white beaches, bioluminescent plankton at night, and jungle trekking trails by day.</p>
+              <div class="flex items-center justify-between">
+                <div><span class="text-white/60 text-xs">From</span><div class="font-display text-2xl font-semibold text-white">$40-$80 <span class="text-sm font-sans font-normal text-white/60">/ night</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Koh Rong Sanloem -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.1s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://i.pinimg.com/736x/0b/20/da/0b20da415ee5c3faf457411aef6ee58e.jpg" alt="Koh Rong Sanloem" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-cyan-500/90 text-white text-xs font-semibold">Peaceful</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Koh Rong Sanloem</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.8</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Quieter sister island with crystalline Lazy Beach, coral reefs perfect for snorkelling, and a blissfully slow pace of life.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$50-100 <span class="text-xs font-sans font-normal text-slate-400">/ night</span></div>
+              <span class="text-xs text-slate-400"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sihanoukville -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.15s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://i.pinimg.com/1200x/6f/dc/64/6fdc646cd8deae76cade020641546a1d.jpg" alt="Otres Beach Sihanoukville" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-blue-500/90 text-white text-xs font-semibold">Beach Town</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Otres Beach</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.6</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">The calmer, laid-back stretch of Sihanoukville's coastline — perfect sunsets, seafood shacks, and hammock living at its finest.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">Free to visit <span class="text-xs font-sans font-normal text-slate-400"></span></div>
+              <span class="text-xs text-slate-400"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sokha Beach -->
+         <div class="dest-card card-1 sm:col-span-2 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-72 sm:h-80">
+            <img src="https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/96085338.jpg?k=2bb53bf6ff9f6492c1077477cc4f7b8680a00daebd35c5f356267e9de20bfa6f&o=" alt="Sokha beach" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold shadow">Editor's Pick</span>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="flex items-center gap-1 mb-2"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-white text-xs font-semibold">4.9</span><span class="text-white/60 text-xs">(876 reviews)</span></div>
+              <h3 class="font-display text-3xl font-semibold text-white">Sokha Beach Resort</h3>
+              <p class="text-white/70 text-sm mt-1 mb-4">Sokha Beach is a clean and peaceful beach in Sihanoukville, known for its soft white sand and clear water—perfect for relaxing and enjoying the sea.</p>
+              <div class="flex items-center justify-between">
+                <div><span class="text-white/60 text-xs">From</span><div class="font-display text-2xl font-semibold text-white">$100 <span class="text-sm font-sans font-normal text-white/60">/ night</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ KAMPOT & CARDAMOM ══════════════════════ -->
+  <section id="kampot" class="py-20 bg-sand-50 dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="mb-12 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Countryside &amp; Nature</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">Kampot, Kep &amp; <em class="italic">the Cardamoms</em></h2>
+        <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-xl">Pepper plantations, river towns, crab markets, and one of the last great rainforest wildernesses in Southeast Asia.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Kampot -->
+        <div class="dest-card card-1 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://www.novo-monde.com/app/uploads/2023/07/kampot-roundabout-1024x683.jpg" alt="Kampot" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold">Colonial Town</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Kampot</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">Charming riverside town famous for world-class Kampot pepper, old French colonial architecture, and lazy sunsets on the Praek Tuek Chhu river.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$40-$70+ <span class="text-xs font-sans font-normal text-slate-400">/ day</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.8</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kep -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.08s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://www.novo-monde.com/app/uploads/2023/07/kep-cambodia-2-1024x683.jpg" alt="Kep" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-semibold">Seafood</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Kep-sur-Mer</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">A tiny seaside village renowned for its crab market, pepper-seasoned seafood, and Kep National Park's shaded forest walks.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$30-$50+ <span class="text-xs font-sans font-normal text-slate-400">/ day</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.7</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cardamom Mountains -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.16s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://www.khmertimeskh.com/wp-content/uploads/2020/02/The-winding-and-scenic-road-around-the-Cardamom.jpg" alt="Cardamom Mountains" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-green-600 text-white text-xs font-semibold">Wildlife</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Cardamom Mountains</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">One of Southeast Asia's largest remaining rainforest areas — home to elephants, sun bears, and wild gibbons heard at dawn.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$50-$100 <span class="text-xs font-sans font-normal text-slate-400">/ day</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.9</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bokor Hill Station -->
+        <div class="dest-card card-4 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.24s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://www.asiakingtravel.com/cuploads/files/Cambodia/Bokor%20National%20Park/Bokor-National-Park-0.jpg" alt="Bokor Hill Station" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-slate-600 text-white text-xs font-semibold">Mysterious</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Bokor Hill Station</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">Eerie French colonial ruins shrouded in mountain mist — a hauntingly beautiful abandoned hill resort with panoramic Gulf views.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$25-$45 <span class="text-xs font-sans font-normal text-slate-400">/ day</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.5</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ NORTHERN CAMBODIA ══════════════════════ -->
+  <section id="siem-reap" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="mb-12 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Northern Regions</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">Off the <em class="italic">Beaten Path</em></h2>
+        <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-xl">Floating villages, remote temples, and the vast inland sea of Tonle Sap — Cambodia beyond the guidebook.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Tonle Sap -->
+        <div class="dest-card card-1 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://media.restless.co.uk/uploads/2024/03/explore-floating-villages-on-tonle-sap-lake-cambodia.jpg" alt="Tonle Sap Lake" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-blue-600/90 text-white text-xs font-semibold">UNESCO Biosphere</span>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <h3 class="font-display text-2xl font-semibold text-white">Tonle Sap Lake</h3>
+              <p class="text-white/70 text-xs mt-1 mb-3">Southeast Asia's largest freshwater lake — home to floating villages where families live their entire lives on water.</p>
+              <div class="flex items-center justify-between">
+                <div class="font-display text-xl font-semibold text-white">$20-$40+ <span class="text-xs font-sans font-normal text-white/60">/ person</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preah Vihear -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.1s">
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://www.vivutravel.com/images/des-cambodia/cambodia-travel-to-Preah-Vihear-Temple.jpg" alt="Preah Vihear" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-700/90 text-white text-xs font-semibold">UNESCO Temple</span>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <h3 class="font-display text-2xl font-semibold text-white">Preah Vihear</h3>
+              <p class="text-white/70 text-xs mt-1 mb-3">A dramatic clifftop temple perched 625 m above the Cambodian plain — more striking even than Angkor, and far fewer crowds.</p>
+              <div class="flex items-center justify-between">
+                <div class="font-display text-xl font-semibold text-white">$10 <span class="text-xs font-sans font-normal text-white/60">/ person</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Battambang -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.15s">
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://asianews.network/wp-content/uploads/bfi_thumb/a_statue_of_lok_ta_dambang_kronhung_at_his_namesake_roundabout_on_national_road_5_in_battambang_town._yousos_apdoulrashim-7c3k7ww6mt989119f86ghkzot0kwf0gtfpku1h3nolc.jpg" alt="Battambang" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-pink-600/90 text-white text-xs font-semibold">Arts Hub</span>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <h3 class="font-display text-2xl font-semibold text-white">Battambang</h3>
+              <p class="text-white/70 text-xs mt-1 mb-3">Cambodia's second city — a thriving arts scene, the world-famous bamboo train, and the most beautiful French colonial streetscapes outside Phnom Penh.</p>
+              <div class="flex items-center justify-between">
+                <div class="font-display text-xl font-semibold text-white">$20-$40 <span class="text-xs font-sans font-normal text-white/60">/ day</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ MORE TEMPLES & SACRED SITES ══════════════════════ -->
+  <section id="temples" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Sacred Sites</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">Beyond Angkor — <em class="italic">More Temples</em></h2>
+        <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-xl">Cambodia's ancient temple network stretches far beyond Siem Reap — from jungle-clad mountain shrines to remote riverside sanctuaries.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Banteay Srei – large -->
+        <div class="dest-card card-1 sm:col-span-2 lg:col-span-1 lg:row-span-2 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-64 lg:h-full min-h-[30rem]">
+            <img src="https://i.pinimg.com/736x/1b/e6/af/1be6af0c0299535809ba8f6ea5db1cc8.jpg" alt="Banteay Srei" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+            <div class="absolute top-4 left-4"><span class="px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-semibold shadow">Jewel of Khmer Art</span></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="flex items-center gap-1 mb-2"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-white text-xs font-semibold">4.9</span><span class="text-white/60 text-xs">(640 reviews)</span></div>
+              <h3 class="font-display text-3xl font-semibold text-white">Banteay Srei</h3>
+              <p class="text-white/70 text-sm mt-1 mb-4">The "Citadel of Women" — carved from rose-pink sandstone with the most intricate bas-relief work of any temple in the Khmer world.</p>
+              <div class="flex items-center justify-between">
+                <div><span class="text-white/60 text-xs">From</span><div class="font-display text-2xl font-semibold text-white">$37 <span class="text-sm font-sans font-normal text-white/60">/ person</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Banteay Samre -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.1s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://static1.evcdn.net/images/reduction/131149_w-3840_h-2160_q-70_m-crop.jpg" alt="Banteay Samre" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-700/90 text-white text-xs font-semibold">Hidden Gem</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Banteay Samre</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.7</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">A remarkably well-preserved 12th-century temple east of Angkor — far fewer crowds, surrounded by rice paddies and local village life.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$37 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preah Khan -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.15s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://d34vm3j4h7f97z.cloudfront.net/original/4X/4/0/5/4054bc6b677a5200922da46cd191e09442d59fb8.jpeg" alt="Preah Khan" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-green-700/90 text-white text-xs font-semibold">Jungle Temple</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Preah Khan</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.8</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">A vast temple-city built by Jayavarman VII, half-reclaimed by jungle — long atmospheric corridors, moss-draped doorways, and ancient fig trees.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$37 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Neak Pean -->
+        <div class="dest-card card-4 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.2s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://tourismcambodia.org/storage/uploads/contents/entryform/ministry-of-tourism-cambodia-2019-02-27-03-22-37am1551237759-1467.png" alt="Neak Pean" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-blue-600/90 text-white text-xs font-semibold">Island Temple</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Neak Pean</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.6</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">A magical circular island temple set in the middle of a sacred lake — reached by a wooden walkway over shimmering water.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$37 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beng Mealea -->
+        <div class="dest-card card-5 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.25s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://cdn.shortpixel.ai/spai/q_glossy+w_977+ret_img/www.timetravelturtle.com/wp-content/uploads/2013/03/Cambodia-2013-388_new.jpg" alt="Beng Mealea" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-emerald-700/90 text-white text-xs font-semibold">Jungle Ruin</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Beng Mealea</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.8</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">An Angkor-scale temple entirely consumed by jungle — tumbled stone blocks, massive roots, and almost no other tourists in sight.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$10 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Koh Ker -->
+        <div class="dest-card card-6 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.3s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://toursbyjeeps.com/wp-content/uploads/2021/07/Untitled-3.jpg" alt="Koh Ker" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-orange-700/90 text-white text-xs font-semibold">Remote</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Koh Ker</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.9</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">A remote 10th-century capital with a striking seven-tiered pyramid rising above dense jungle — newly listed as a UNESCO World Heritage Site in 2023.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$15 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Ba kheng -->
+         <div class="dest-card card-1 sm:col-span-2 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-72 sm:h-80">
+            <img src="https://cdn.sanity.io/images/nxpteyfv/goguides/3461cbd6064719640f751ad68581ef4d556a73c8-1600x1066.jpg" alt="Koh Rong" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold shadow">Editor's Pick</span>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="flex items-center gap-1 mb-2"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-white text-xs font-semibold">4.9</span><span class="text-white/60 text-xs">(876 reviews)</span></div>
+              <h3 class="font-display text-3xl font-semibold text-white">Bakheng</h3>
+              <p class="text-white/70 text-sm mt-1 mb-4">Phnom Bakheng is an ancient hilltop temple near Angkor, famous for its beautiful sunset views. Built in the 9th century, it offers a peaceful atmosphere and a great panoramic view of the surrounding forest and temples.
+</p>
+              <div class="flex items-center justify-between">
+                <div><span class="text-white/60 text-xs">From</span><div class="font-display text-2xl font-semibold text-white">$37 <span class="text-sm font-sans font-normal text-white/60">/ person</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ HIDDEN BEACHES & MORE ISLANDS ══════════════════════ -->
+  <section id="hidden-beaches" class="py-20 bg-sand-50 dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Hidden Coastline</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">Secret Islands &amp; <em class="italic">Unspoiled Shores</em></h2>
+        <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-xl">Beyond Koh Rong, Cambodia hides dozens of islands barely touched by tourism — white sand, clear water, and absolute silence.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Koh Ta Kiev -->
+        <div class="dest-card card-1 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://images.trvl-media.com/place/3000005734/309320c8-0ab7-4102-bae2-996c703a437c.jpg" alt="Koh Ta Kiev" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-teal-600 text-white text-xs font-semibold">Off-Grid</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Koh Ta Kiev</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">No electricity, no Wi-Fi, no crowds — just hammocks strung between palms, bioluminescent water, and the sound of the jungle at night.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$30-$50+ <span class="text-xs font-sans font-normal text-slate-400">/ day</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.8</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Koh Sdach -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.08s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://visitlocaltravel.com/blog/wp-content/uploads/2024/01/Koh-Sdach-2.png" alt="Koh Sdach" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-cyan-600 text-white text-xs font-semibold">Fishing Village</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Koh Sdach Archipelago</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">A cluster of 23 tiny islands — the King's Island group — with deserted beaches, vibrant reefs, and one of Cambodia's most authentic fishing communities.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$170 <span class="text-xs font-sans font-normal text-slate-400">/ day</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.7</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Koh Tonsay (Rabbit Island) -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.16s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://www.asiakingtravel.com/cuploads/files/Kep/Koh-Tonsay/Koh-Tonsay-Guide-Weather.jpg" alt="Koh Tonsay Rabbit Island" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-lime-600 text-white text-xs font-semibold">Rabbit Island</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Koh Tonsay</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">Just 20 minutes by boat from Kep — a laid-back island of turquoise shallows, wooden bungalows under coconut palms, and fresh grilled barracuda at sunset.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$35-$60 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.8</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Koh Kong -->
+        <div class="dest-card card-4 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.24s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/a9/73/f1/song-saa-private-island.jpg?w=600&h=400&s=1" alt="Koh Kong" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-green-700 text-white text-xs font-semibold">Eco Adventure</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Koh Kong</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">Gateway to the Cardamom eco-system — mangrove kayaking, jungle waterfalls, and pristine Tatai River lodges deep in the rainforest canopy.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$150+ <span class="text-xs font-sans font-normal text-slate-400">/ day</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.9</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ CULTURE, FOOD & MARKETS ══════════════════════ -->
+  <section id="culture" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Food &amp; Culture</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">Markets, Flavours &amp; <em class="italic">Living Culture</em></h2>
+        <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-xl">Dive into the soul of Cambodia through its bustling markets, ancient arts, and vibrant everyday life.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Central Market – large -->
+        <div class="dest-card card-1 sm:col-span-2 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-72">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Aerial_view_of_Phnom_Penh%27s_Central_Market_%28September_2021%29.jpg" alt="Central Market Phnom Penh" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold shadow">Food Lover's Pick</span>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="flex items-center gap-1 mb-2"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-white text-xs font-semibold">4.8</span><span class="text-white/60 text-xs">(520 reviews)</span></div>
+              <h3 class="font-display text-3xl font-semibold text-white">Central Market (Psah Thmei)</h3>
+              <p class="text-white/70 text-sm mt-1 mb-4">Phnom Penh's stunning Art Deco market — a labyrinth of fresh produce, street food stalls, silks, gems, and the most photogenic chaos you'll find anywhere in the city.</p>
+              <div class="flex items-center justify-between">
+                <div><span class="text-white/60 text-xs">From</span><div class="font-display text-2xl font-semibold text-white">$16-$50 <span class="text-sm font-sans font-normal text-white/60">/ person</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apsara Dance -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.1s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/da/20/4d/caption.jpg?w=1200&h=-1&s=1" alt="Apsara Dance" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-pink-600/90 text-white text-xs font-semibold">Performing Arts</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Apsara Dance Performance</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.9</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">A UNESCO-listed dance form — golden-costumed Apsara dancers perform ancient court dances at temple venues and the National Museum in a spellbinding evening show.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$10-$39+ <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pub street -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.15s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://travellenz.in/wp-content/uploads/2018/04/DSC_0884.jpg" alt="Old Market Siem Reap" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-yellow-600/90 text-white text-xs font-semibold">Street Food</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Pub street</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.7</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Pub Street is the main nightlife area in Siem Reap, known for its lively atmosphere, colorful lights, and many bars, restaurants, and shops. It’s a popular place where tourists gather at night to enjoy food, music, and entertainment.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$19-$32+ <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lake Yeak Loam -->
+        <div class="dest-card card-4 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.2s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Yak_Loum.jpg" alt="Silk Weaving" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-purple-600/90 text-white text-xs font-semibold">Artisan</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Yeak Loam Lake</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.8</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Yeak Laom Lake is a beautiful volcanic crater lake located near Banlung. It is known for its clear, deep water and perfectly round shape, surrounded by forest. The lake is also a peaceful and sacred place for local indigenous communities, making it both a natural and cultural attraction.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$5-$10 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <span class="text-xs text-slate-400">Half day</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kratie & Irrawaddy Dolphins -->
+        <div class="dest-card card-5 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.25s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://lh3.googleusercontent.com/proxy/SuRnsy0mKmyNNsmH-zi_0gYo0t1iztkyVtVefuJEtgZLg0bQVq9gOCrKU6SQm5PHUoz1yqgFrD5TqHIMgX_VjyDSiU0hxK8Y9NWjuyIkGdjhm0pz_HlWYnBmPHVEerzfIIt71IyUbqtwTRGdygTBJ7pZ7VjqGyFL6Br63PP6154U" alt="Kratie Dolphins" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-sky-600/90 text-white text-xs font-semibold">Wildlife</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Kratie &amp; River Dolphins</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">4.9</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">One of the last places on Earth to spot the rare Irrawaddy freshwater dolphin — watch them at sunset from a traditional wooden boat near Kampi pool.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$25-$50 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mondulkiri & Elephant Valley -->
+        <div class="dest-card card-6 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.3s">
+          <div class="relative h-52 overflow-hidden">
+            <img src="https://www.cambotours.com/userfiles/thumbs/mondulkiri-project.jpg" alt="Mondulkiri Elephant Valley" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"></div>
+            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-green-800/90 text-white text-xs font-semibold">Elephant Sanctuary</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="font-display text-xl font-semibold dark:text-white">Mondulkiri &amp; Elephant Valley</h3>
+              <div class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-sm font-semibold dark:text-white">5.0</span></div>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Cambodia's wild northeast highlands — walk with rescued elephants through pine forests, visit indigenous Bunong villages, and swim in the stunning Bou Sra waterfall.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-xl font-semibold dark:text-white">$50-$300 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aquarium -->
+         <div class="dest-card card-1 sm:col-span-2 rounded-3xl overflow-hidden shadow-xl dark:shadow-black/40 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-72 sm:h-80">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/a2/f0/9c/aquarium-in-siem-reap.jpg?w=1200&h=900&s=1" alt="Aquarium" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sand-500 text-white text-xs font-semibold shadow">Editor's Pick</span>
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="flex items-center gap-1 mb-2"><svg class="w-3.5 h-3.5 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-white text-xs font-semibold">4.9</span><span class="text-white/60 text-xs">(876 reviews)</span></div>
+              <h3 class="font-display text-3xl font-semibold text-white">Angkor Wildlife & Aquarium</h3>
+              <p class="text-white/70 text-sm mt-1 mb-4">Angkor Wildlife & Aquarium is a modern attraction near Siem Reap that combines a large aquarium with a wildlife park. Visitors can see a variety of animals, from fish and reptiles to rescued wildlife, while also learning about conservation and nature in an interactive and family-friendly environment.</p>
+              <div class="flex items-center justify-between">
+                <div><span class="text-white/60 text-xs"></span><div class="font-display text-2xl font-semibold text-white">$11 <span class="text-sm font-sans font-normal text-white/60">/ child</span></div></div>
+                <div><span class="text-white/60 text-xs"></span><div class="font-display text-2xl font-semibold text-white">$20 <span class="text-sm font-sans font-normal text-white/60">/ adult</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ NORTHEAST HIGHLANDS ══════════════════════ -->
+  <section id="northeast" class="py-20 bg-sand-50 dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Remote Highlands</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white">The Wild <em class="italic">Northeast</em></h2>
+        <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-xl">Ratanakiri, Stung Treng, and the Mekong Discovery Trail — Cambodia's last great wilderness frontier.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Ratanakiri & Yeak Laom -->
+        <div class="dest-card card-1 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Yak_Loum.jpg" alt="Yeak Laom Lake" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-teal-700 text-white text-xs font-semibold">Volcanic Lake</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Ratanakiri &amp; Yeak Laom</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">A perfectly circular volcanic crater lake of extraordinary clarity, sacred to local indigenous Tampuan people — swimming here feels like bathing in liquid emerald.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$110-$168 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.9</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stung Treng & Mekong -->
+        <div class="dest-card card-2 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.08s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://www.cambotours.com/userfiles/stung-treng-tourist-attraction.jpg" alt="Mekong River" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-blue-700 text-white text-xs font-semibold">River Life</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Stung Treng &amp; Mekong</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">Kayak through the flooded forests and stone-strewn rapids of the upper Mekong — a remote river adventure shared only with fishermen and river dolphins.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$126-$194 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.8</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sen Monorom -->
+        <div class="dest-card card-3 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.16s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://le-cambodge-autrement.com/images/blog-images/96%20Province%20du%20Mondulkiri.%20Que%20faire.JPG" alt="Sen Monorom" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-lime-700 text-white text-xs font-semibold">Highland Town</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Sen Monorom</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">The cool, forested capital of Mondulkiri province — base for elephant treks, indigenous village visits, roaring jungle waterfalls, and star-filled highland nights.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$102-$174 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.8</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kompong Thom -->
+        <div class="dest-card card-4 rounded-3xl overflow-hidden shadow-md dark:shadow-black/30 bg-white dark:bg-slate-800 group cursor-pointer" onclick="window.location='detail.html'" style="transition-delay:0.24s">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://www.vivutravel.com/images/des-cambodia3/kampong-thom-travel-guide.jpg" alt="Kompong Thom" class="card-img w-full h-full object-cover"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-amber-800 text-white text-xs font-semibold">Undiscovered</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-display text-lg font-semibold mb-1 dark:text-white">Kompong Thom</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mb-3">A sleepy provincial town hiding the astonishing Sambor Prei Kuk pre-Angkorian temple complex — Cambodia's oldest brick temples, hidden in forest with almost no visitors.</p>
+            <div class="flex items-center justify-between">
+              <div class="font-display text-lg font-semibold dark:text-white">$135-$250 <span class="text-xs font-sans font-normal text-slate-400">/ person</span></div>
+              <div class="flex items-center gap-1"><svg class="w-3 h-3 text-sand-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><span class="text-xs font-semibold dark:text-white">4.7</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ WHY CAMBODIA ══════════════════════ -->
+  <section class="py-24 bg-sand-50 dark:bg-slate-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Why Visit</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white">The Cambodia <em class="italic">Experience</em></h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="reveal text-center group" style="transition-delay:0.05s">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-50 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(255, 212, 59)" d="M184 64C197.3 64 208 74.7 208 88L208 96L248 96L248 88C248 74.7 258.7 64 272 64C285.3 64 296 74.7 296 88L296 96L344 96L344 88C344 74.7 354.7 64 368 64C381.3 64 392 74.7 392 88L392 96L432 96L432 88C432 74.7 442.7 64 456 64C469.3 64 480 74.7 480 88L480 224C506.5 224 528 245.5 528 272L528 352C554.5 352 576 373.5 576 400L576 528C576 554.5 554.5 576 528 576L480 576L480 352L448 352L448 224L400 224L400 352L432 352L432 576L208 576L208 352L240 352L240 224L192 224L192 352L160 352L160 576L112 576C85.5 576 64 554.5 64 528L64 400C64 373.5 85.5 352 112 352L112 272C112 245.5 133.5 224 160 224L160 88C160 74.7 170.7 64 184 64zM320 272C302.3 272 288 286.3 288 304L288 352L352 352L352 304C352 286.3 337.7 272 320 272zM272 464L272 528L368 528L368 464C368 437.5 346.5 416 320 416C293.5 416 272 437.5 272 464zM320 160C302.3 160 288 174.3 288 192L288 224L352 224L352 192C352 174.3 337.7 160 320 160z"/></svg></div>
+          <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">Ancient Wonders</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Over 1,000 Khmer temples in the Angkor Archaeological Park alone — the largest pre-industrial city on Earth.</p>
+        </div>
+        <div class="reveal text-center group" style="transition-delay:0.1s">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-50 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(255, 212, 59)" d="M300.9 149.2L184.3 278.8C179.7 283.9 179.9 291.8 184.8 296.7C215.3 327.2 264.8 327.2 295.3 296.7L327.1 264.9C331.3 260.7 336.6 258.4 342 258C348.8 257.4 355.8 259.7 361 264.9L537.6 440L608 384L608 96L496 160L472.2 144.1C456.4 133.6 437.9 128 418.9 128L348.5 128C347.4 128 346.2 128 345.1 128.1C328.2 129 312.3 136.6 300.9 149.2zM148.6 246.7L255.4 128L215.8 128C190.3 128 165.9 138.1 147.9 156.1L144 160L32 96L32 384L188.4 514.3C211.4 533.5 240.4 544 270.3 544L286 544L279 537C269.6 527.6 269.6 512.4 279 503.1C288.4 493.8 303.6 493.7 312.9 503.1L353.9 544.1L362.9 544.1C382 544.1 400.7 539.8 417.7 531.8L391 505C381.6 495.6 381.6 480.4 391 471.1C400.4 461.8 415.6 461.7 424.9 471.1L456.9 503.1L474.4 485.6C483.3 476.7 485.9 463.8 482 452.5L344.1 315.7L329.2 330.6C279.9 379.9 200.1 379.9 150.8 330.6C127.8 307.6 126.9 270.7 148.6 246.6z"/></svg></div>
+          <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">Khmer Warmth</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Cambodians are ranked among the most welcoming people in Southeast Asia — a warmth that stays with you long after you leave.</p>
+        </div>
+        <div class="reveal text-center group" style="transition-delay:0.15s">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-50 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(255, 212, 59)" d="M64 240C64 204.7 92.7 176 128 176C128.5 176 129.1 176 129.6 176C137 139.5 169.3 112 208 112C223 112 237 116.1 248.9 123.2C262.2 97.5 289 80 320 80C351 80 377.8 97.6 391.1 123.2C403.1 116.1 417.1 112 432 112C470.7 112 503 139.5 510.4 176C510.9 176 511.5 176 512 176C547.3 176 576 204.7 576 240C576 251.7 572.9 262.6 567.4 272L72.6 272C67.1 262.6 64 251.7 64 240zM64 347.4C64 332.3 76.3 320 91.4 320L548.5 320C563.6 320 575.9 332.3 575.9 347.4C575.9 417.9 531.5 478.1 469.2 501.5L467.5 516C465.5 532 451.9 544 435.7 544L204.2 544C188.1 544 174.4 532 172.4 516L170.6 501.6C108.4 478.1 64 417.9 64 347.4z"/></svg></div>
+          <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">Khmer Cuisine</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">From fragrant fish amok to Kuy teav noodle soup — Cambodian food is complex, aromatic, and wildly underrated globally.</p>
+        </div>
+        <div class="reveal text-center group" style="transition-delay:0.2s">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-50 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(99, 230, 190)" d="M128 128C92.7 128 64 156.7 64 192L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 192C576 156.7 547.3 128 512 128L128 128zM320 208C381.9 208 432 258.1 432 320C432 381.9 381.9 432 320 432C258.1 432 208 381.9 208 320C208 258.1 258.1 208 320 208zM128 248L128 200C128 195.6 131.6 192 136 192L184 192C188.4 192 192.1 195.6 191.5 200C187.9 229 164.9 251.9 136 255.5C131.6 256 128 252.4 128 248zM128 392C128 387.6 131.6 383.9 136 384.5C165 388.1 187.9 411.1 191.5 440C192 444.4 188.4 448 184 448L136 448C131.6 448 128 444.4 128 440L128 392zM504 255.5C475 251.9 452.1 228.9 448.5 200C448 195.6 451.6 192 456 192L504 192C508.4 192 512 195.6 512 200L512 248C512 252.4 508.4 256.1 504 255.5zM512 392L512 440C512 444.4 508.4 448 504 448L456 448C451.6 448 447.9 444.4 448.5 440C452.1 411 475.1 388.1 504 384.5C508.4 384 512 387.6 512 392zM304 252C293 252 284 261 284 272C284 281.7 290.9 289.7 300 291.6L300 340L296 340C285 340 276 349 276 360C276 371 285 380 296 380L344 380C355 380 364 371 364 360C364 349 355 340 344 340L340 340L340 272C340 261 331 252 320 252L304 252z"/></svg></div>
+          <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">Exceptional Value</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">World-class experiences at a fraction of the cost of other destinations — more adventure per dollar than almost anywhere on Earth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ TESTIMONIALS ══════════════════════ -->
+  <section class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-14 reveal">
+        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Traveler Stories</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white">From Our <em class="italic">Cambodia Travelers</em></h2>
+        <p class="mt-3 text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Real experiences from people who discovered the Kingdom of Wonder with Wanderlust.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="testi-card rounded-3xl p-7 bg-sand-50 dark:bg-slate-800 shadow-md dark:shadow-black/30 reveal" style="transition-delay:0.05s">
+          <div class="stars text-lg mb-4">★★★★★</div>
+          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed italic font-light mb-6">"Watching the sun rise over Angkor Wat was the single most beautiful moment of my life. Wanderlust arranged a private dawn access visit — totally unforgettable."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&h=80&fit=crop&q=75" alt="Marco R" class="w-10 h-10 rounded-full object-cover"/>
+            <div>
+              <div class="text-sm font-semibold dark:text-white">Marco Rossi</div>
+              <div class="text-xs text-slate-400">Angkor Wat, Siem Reap</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card rounded-3xl p-7 bg-sand-500 shadow-xl shadow-sand-500/30 reveal" style="transition-delay:0.1s">
+          <div class="text-white/70 text-lg mb-4">★★★★★</div>
+          <p class="text-white/90 text-sm leading-relaxed italic font-light mb-6">"Koh Rong at night with the bioluminescent plankton glowing in the waves — I genuinely thought I was dreaming. This trip changed how I see the world."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&q=75" alt="Priya S" class="w-10 h-10 rounded-full object-cover"/>
+            <div>
+              <div class="text-sm font-semibold text-white">Priya Sharma</div>
+              <div class="text-xs text-white/60">Koh Rong Island</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card rounded-3xl p-7 bg-sand-50 dark:bg-slate-800 shadow-md dark:shadow-black/30 reveal" style="transition-delay:0.15s">
+          <div class="stars text-lg mb-4">★★★★★</div>
+          <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed italic font-light mb-6">"The Kampot pepper farm tour, a sunset boat on the river, fresh crab in Kep — all in one day. Cambodia is just the most special place. Already planning to return."</p>
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=75" alt="Liam T" class="w-10 h-10 rounded-full object-cover"/>
+            <div>
+              <div class="text-sm font-semibold dark:text-white">Liam Turner</div>
+              <div class="text-xs text-slate-400">Kampot &amp; Kep</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- ══════════════════════ FOOTER ══════════════════════ -->
+  <footer class="bg-slate-900 dark:bg-slate-950 text-slate-400 pt-16 pb-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+        <!-- Brand -->
+        <div class="lg:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-7 h-7 rounded-full bg-sand-500 flex items-center justify-center">
+              <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12zm-1-5h2v2H9v-2zm0-6h2v4H9V5z"/></svg>
+            </div>
+            <span class="font-display text-xl text-white">Angkor-Travels</span>
+          </div>
+          <p class="text-sm leading-relaxed text-slate-500 mb-5">Crafting extraordinary travel experiences since 2022. Over 40,000 happy travelers and counting.</p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Cambodia</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#angkor" class="hover:text-sand-400 transition-colors">Angkor &amp; Siem Reap</a></li>
+            <li><a href="#phnom-penh" class="hover:text-sand-400 transition-colors">Phnom Penh</a></li>
+            <li><a href="#koh-rong" class="hover:text-sand-400 transition-colors">Islands &amp; Coast</a></li>
+            <li><a href="#kampot" class="hover:text-sand-400 transition-colors">Kampot &amp; Kep</a></li>
+            <li><a href="#siem-reap" class="hover:text-sand-400 transition-colors">Off the Beaten Path</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Company</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#" class="hover:text-sand-400 transition-colors">About Us</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Our Team</a></li>
+            <li><a href="contact.html" class="hover:text-sand-400 transition-colors">Contact</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Sustainability</a></li>
+            <li><a href="#" class="hover:text-sand-400 transition-colors">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Stay Inspired</h4>
+          <p class="text-sm text-slate-500 mb-4">Get exclusive Cambodia deals and travel inspo straight to your inbox.</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="your@email.com" class="flex-1 min-w-0 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sand-500 transition-colors"/>
+            <button class="px-3 py-2 rounded-lg bg-sand-500 hover:bg-sand-600 text-white text-sm transition-colors shrink-0">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
+        <span>© 2026 Angkor-Travels. All rights reserved.</span>
+        <div class="flex gap-5">
+          <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-slate-400 transition-colors">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ══════════════════════ JAVASCRIPT ══════════════════════ -->
+  <script>
+    // ─── Dark/Light Mode Toggle ───────────────────────────────────────
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.classList.add('dark');
+    }
+    themeToggle.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // ─── Navbar scroll effect ─────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    const logoText = document.querySelector('.font-display.text-2xl');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('bg-white/95', 'dark:bg-slate-900/95', 'backdrop-blur-xl', 'shadow-md', 'shadow-black/5', 'border-b', 'border-slate-200/50', 'dark:border-slate-800/50');
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.remove('text-white', 'text-white/80');
+          l.classList.add('text-slate-700', 'dark:text-slate-300');
+        });
+        if (logoText) { logoText.classList.remove('text-white'); logoText.classList.add('text-slate-800', 'dark:text-white'); }
+      } else {
+        navbar.classList.remove('bg-white/95', 'dark:bg-slate-900/95', 'backdrop-blur-xl', 'shadow-md', 'shadow-black/5', 'border-b', 'border-slate-200/50', 'dark:border-slate-800/50');
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.add('text-white');
+          l.classList.remove('text-slate-700', 'dark:text-slate-300');
+        });
+        if (logoText) { logoText.classList.add('text-white'); logoText.classList.remove('text-slate-800', 'dark:text-white'); }
+      }
+    });
+
+    // ─── Scroll Reveal ────────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ─── Category Pills ───────────────────────────────────────────────
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cagitt-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+
+    // ─── Mobile Menu ──────────────────────────────────────────────────
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  </script>
+
 </body>
 </html>
