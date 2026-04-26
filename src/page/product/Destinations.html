@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cambodia Destinations — Wanderlust</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="/src/img/remove-logo.png">
+        <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Angkor Travel" />
+    <meta property="og:description" content="Beyond the sacred stones and jungle shadows, we guide you to a place where history breathes and your own journey of discovery begins."/>
+    <meta property="og:image" content="/src/img/remove-logo.png" />
   <!-- Replace the line below with your own output.css link -->
   <!-- <link rel="stylesheet" href="../src/output.css"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -223,6 +230,19 @@
     .highlight-ring {
       box-shadow: 0 0 0 2px rgba(212,133,58,0.5), 0 20px 60px rgba(0,0,0,0.2);
     }
+          .nav-link::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 1.5px;
+        background: #d4853a;
+        transition: width 0.3s ease;
+        margin-top: 2px;
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
   </style>
 </head>
 
@@ -231,50 +251,129 @@
 
   <!-- ══════════════════════ NAVBAR ══════════════════════ -->
   <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+         <nav
+        class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <a href="index.html" class="flex items-center gap-2 group">
+          <div
+            class="w-15 h-15 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+          >
+            <img
+              class="rounded-full bg-sand-100 w-10 h-10"
+              src="/src/img/remove-logo.png"
+              alt="logo"
+            />
+          </div>
+          <span
+            class="font-display text-2xl font-semibold text-white drop-shadow-md tracking-wide"
+            >Angkor-Travels</span
+          >
+        </a>
 
-      <!-- Logo -->
-      <a href="../index.html" class="flex items-center gap-2 group">
-        <div class="w-8 h-8 rounded-full bg-sand-500 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12zm-1-5h2v2H9v-2zm0-6h2v4H9V5z"/>
-          </svg>
+        <ul class="hidden md:flex items-center gap-8">
+          <li>
+            <a
+              href="/index.html"
+              class="nav-link active text-white text-xl font-medium tracking-wide drop-shadow"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="../product/Destinations.html"
+              class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors"
+              >Destinations</a
+            >
+          </li>
+            <li>
+            <a
+              href="../details/detailpage.html"
+              class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors"
+              >Details</a
+            >
+          </li>
+          <li>
+            <a
+              href="../about/about.html"
+              class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors"
+              >About us</a
+            >
+          </li>
+        </ul>
+
+        <div class="flex items-center gap-4">
+          <button
+            id="themeToggle"
+            aria-label="Toggle dark mode"
+            class="relative w-14 h-7 rounded-full toggle-track bg-white/20 dark:bg-slate-700 border border-white/30 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sand-400"
+          >
+            <span
+              id="toggleThumb"
+              class="toggle-thumb absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-xs dark:translate-x-7"
+            >
+              <svg
+                id="sunIcon"
+                class="w-3.5 h-3.5 text-sand-500 dark:hidden"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.78a1 1 0 011.42 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71zm-9.86 0l.71.71A1 1 0 115.65 5.9l-.71-.71A1 1 0 014.36 3.78zM10 5a5 5 0 100 10A5 5 0 0010 5zm8 4h-1a1 1 0 110-2h1a1 1 0 110 2zm-14 0H3a1 1 0 110-2h1a1 1 0 110 2zm10.95 4.95a1 1 0 011.42 0l.71.71a1 1 0 11-1.42 1.42l-.71-.71a1 1 0 010-1.42zm-10.32 0a1 1 0 010 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71a1 1 0 011.42 0zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"
+                />
+              </svg>
+              <svg
+                id="moonIcon"
+                class="w-3.5 h-3.5 text-slate-700 hidden dark:block"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                />
+              </svg>
+            </span>
+          </button>     
+          <a
+            href="../auth/register.html"
+            class="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-sm font-semibold shadow-lg hover:shadow-sand-500/30 transition-all duration-200"
+          >
+                    Sign in
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </a>
+          <button
+            id="menuBtn"
+            class="md:hidden text-white"
+            aria-label="Open menu"
+          >
+
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
         </div>
-        <span class="font-display text-2xl font-semibold text-white drop-shadow-md tracking-wide">Angkor-Travels</span>
-      </a>
-
-      <!-- Desktop Nav -->
-      <ul class="hidden md:flex items-center gap-8">
-        <li><a href="../index.html" class="nav-link text-white/80 hover:text-white text-sm font-medium tracking-wide drop-shadow transition-colors">Home</a></li>
-        <li><a href="Destinations.html" class="nav-link active text-white text-sm font-medium tracking-wide drop-shadow">Destinations</a></li>
-        <li><a href="detail.html" class="nav-link text-white/80 hover:text-white text-sm font-medium tracking-wide drop-shadow transition-colors">About</a></li>
-        <li><a href="contact.html" class="nav-link text-white/80 hover:text-white text-sm font-medium tracking-wide drop-shadow transition-colors">Contact</a></li>
-      </ul>
-
-      <!-- Right Actions -->
-      <div class="flex items-center gap-4">
-
-        <!-- Dark/Light Toggle -->
-        <button id="themeToggle" aria-label="Toggle dark mode"
-          class="relative w-14 h-7 rounded-full toggle-track bg-white/20 dark:bg-slate-700 border border-white/30 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sand-400">
-          <span id="toggleThumb"
-            class="toggle-thumb absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-xs dark:translate-x-7">
-            <svg class="w-3.5 h-3.5 text-sand-500 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.78a1 1 0 011.42 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71zm-9.86 0l.71.71A1 1 0 115.65 5.9l-.71-.71A1 1 0 014.36 3.78zM10 5a5 5 0 100 10A5 5 0 0010 5zm8 4h-1a1 1 0 110-2h1a1 1 0 110 2zm-14 0H3a1 1 0 110-2h1a1 1 0 110 2zm10.95 4.95a1 1 0 011.42 0l.71.71a1 1 0 11-1.42 1.42l-.71-.71a1 1 0 010-1.42zm-10.32 0a1 1 0 010 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71a1 1 0 011.42 0zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"/>
-            </svg>
-            <svg class="w-3.5 h-3.5 text-slate-700 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
-            </svg>
-          </span>
-        </button>
-
-        <a href="auth.html" class="hidden md:block text-sm font-medium text-orange-300 hover:text-orange-500 transition-colors drop-shadow">Sign in</a>
-
-        <button id="menuBtn" class="md:hidden text-white" aria-label="Open menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </div>
-    </nav>
+      </nav>
 
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 space-y-4">
@@ -1408,67 +1507,126 @@
 
 
 
-
-  <!-- ══════════════════════ FOOTER ══════════════════════ -->
-  <footer class="bg-slate-900 dark:bg-slate-950 text-slate-400 pt-16 pb-8 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-
-        <!-- Brand -->
-        <div class="lg:col-span-1">
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-7 h-7 rounded-full bg-sand-500 flex items-center justify-center">
-              <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12zm-1-5h2v2H9v-2zm0-6h2v4H9V5z"/></svg>
+    <footer
+      class="bg-slate-900 dark:bg-slate-950 text-slate-400 pt-16 pb-8 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12"
+        >
+          <div class="lg:col-span-1">
+            <div class="flex items-center gap-2 mb-4">
+              <div
+                class="w-7 h-7 rounded-full bg-sand-500 flex items-center justify-center"
+              >
+            <img src="/src/img/remove-logo.png" alt="logo-footer">
+              </div>
+              <span class="font-display text-xl text-white"
+                >Angkor-Travels</span
+              >
             </div>
-            <span class="font-display text-xl text-white">Angkor-Travels</span>
+            <p class="text-sm leading-relaxed text-slate-500 mb-5">
+             Angkor-Travel is your premier gateway to the Kingdom of Wonder, offering expert-led tours through the majestic ruins of the Angkor Archaeological Park. 
+            </p> 
           </div>
-          <p class="text-sm leading-relaxed text-slate-500 mb-5">Crafting extraordinary travel experiences since 2022. Over 40,000 happy travelers and counting.</p>
+
+          <div>
+            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+              Explore
+            </h4>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a
+                  href="/index.html"
+                  class="hover:text-sand-400 transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/src/page/product/Destinations.html"
+                  class="hover:text-sand-400 transition-colors"
+                  >Destinations</a
+                >
+              </li>
+              <li>
+                <a href="/src/page/details/detailpage.html" class="hover:text-sand-400 transition-colors"
+                  >Details</a
+                >
+              </li>
+              <li>
+                <a href="/src/page/about/about.html" class="hover:text-sand-400 transition-colors"
+                  >About us</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+              Contacts
+            </h4>
+            <ul class="space-y-2.5 text-sm">
+              <li>
+                <a href="#" class="hover:text-sand-400 transition-colors"
+                  ><i class="fa-brands fa-telegram" style="color: rgb(168, 164, 164);"></i>Telegram</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-sand-400 transition-colors"
+                  ><i class="fa-brands fa-facebook" style="color: rgb(168, 164, 164);"></i>Facebook</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact.html"
+                  class="hover:text-sand-400 transition-colors"
+                  ><i class="fa-solid fa-envelope" style="color: rgb(168, 164, 164);"></i>Email</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+              Stay Inspired
+            </h4>
+            <p class="text-sm text-slate-500 mb-4">
+              Get exclusive deals and travel inspo straight to your inbox.
+            </p>
+            <div class="flex gap-2">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                class="flex-1 min-w-0 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sand-500 transition-colors"
+              />
+              <button
+                class="px-3 py-2 rounded-lg bg-sand-500 hover:bg-sand-600 text-white text-sm transition-colors shrink-0"
+              >
+                →
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- Links -->
-        <div>
-          <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Cambodia</h4>
-          <ul class="space-y-2.5 text-sm">
-            <li><a href="#angkor" class="hover:text-sand-400 transition-colors">Angkor &amp; Siem Reap</a></li>
-            <li><a href="#phnom-penh" class="hover:text-sand-400 transition-colors">Phnom Penh</a></li>
-            <li><a href="#koh-rong" class="hover:text-sand-400 transition-colors">Islands &amp; Coast</a></li>
-            <li><a href="#kampot" class="hover:text-sand-400 transition-colors">Kampot &amp; Kep</a></li>
-            <li><a href="#siem-reap" class="hover:text-sand-400 transition-colors">Off the Beaten Path</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Company</h4>
-          <ul class="space-y-2.5 text-sm">
-            <li><a href="#" class="hover:text-sand-400 transition-colors">About Us</a></li>
-            <li><a href="#" class="hover:text-sand-400 transition-colors">Our Team</a></li>
-            <li><a href="contact.html" class="hover:text-sand-400 transition-colors">Contact</a></li>
-            <li><a href="#" class="hover:text-sand-400 transition-colors">Sustainability</a></li>
-            <li><a href="#" class="hover:text-sand-400 transition-colors">Careers</a></li>
-          </ul>
-        </div>
-
-        <!-- Newsletter -->
-        <div>
-          <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">Stay Inspired</h4>
-          <p class="text-sm text-slate-500 mb-4">Get exclusive Cambodia deals and travel inspo straight to your inbox.</p>
-          <div class="flex gap-2">
-            <input type="email" placeholder="your@email.com" class="flex-1 min-w-0 bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sand-500 transition-colors"/>
-            <button class="px-3 py-2 rounded-lg bg-sand-500 hover:bg-sand-600 text-white text-sm transition-colors shrink-0">→</button>
+        <div
+          class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600"
+        >
+          <span>© 2025 Angkor-Travels. All rights reserved.</span>
+          <div class="flex gap-5">
+            <a href="#" class="hover:text-slate-400 transition-colors"
+              >Privacy Policy</a
+            >
+            <a href="#" class="hover:text-slate-400 transition-colors"
+              >Terms of Service</a
+            >
+            <a href="#" class="hover:text-slate-400 transition-colors"
+              >Cookie Settings</a
+            >
           </div>
         </div>
       </div>
-
-      <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
-        <span>© 2026 Angkor-Travels. All rights reserved.</span>
-        <div class="flex gap-5">
-          <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
-          <a href="#" class="hover:text-slate-400 transition-colors">Cookie Settings</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
 
   <!-- ══════════════════════ JAVASCRIPT ══════════════════════ -->
