@@ -186,6 +186,10 @@
   filter: contrast(1.08) saturate(1.2) brightness(1.05);
   /* Boosts color richness and slightly brightens to match cards 2 & 3 */
 }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
   </style>
 </head>
 
@@ -339,30 +343,13 @@
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] spin-ring opacity-20 pointer-events-none"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] spin-ring-r opacity-10 pointer-events-none"></div>
 
-    <!-- Floating text chips -->
-    <div class="absolute top-1/4 left-8 lg:left-16 hidden lg:flex items-center gap-2 bg-white/10 backdrop-blur border border-white/15 rounded-full px-4 py-2 text-white/70 text-xs animate-float" style="animation-delay:0s">
-      <span class="text-base">🌍</span> 26 cities explored
-    </div>
-    <div class="absolute top-1/3 right-8 lg:right-20 hidden lg:flex items-center gap-2 bg-white/10 backdrop-blur border border-white/15 rounded-full px-4 py-2 text-white/70 text-xs animate-float" style="animation-delay:-2.5s">
-      <span class="text-base">⭐</span> 15 Years of expertise
-    </div>
-    <div class="absolute bottom-1/3 left-12 hidden lg:flex items-center gap-2 bg-white/10 backdrop-blur border border-white/15 rounded-full px-4 py-2 text-white/70 text-xs animate-float" style="animation-delay:-4s">
-      <span class="text-base">🏆</span> 23 Industry awards
-    </div>
-
     <div class="relative z-10 max-w-7xl mx-auto px-6 py-20">
       <!-- Breadcrumb -->
       <nav class="flex items-center gap-2 text-xs text-white/40 mb-8 animate-fade-in" style="animation-delay:.05s">
-        <a href="index.html" class="hover:text-white/70 transition-colors">Home</a>
-        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-        <span class="text-sand-400">About Us</span>
+       
       </nav>
 
       <div class="max-w-3xl">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/8 border border-white/15 text-white/65 text-xs font-medium tracking-widest uppercase mb-6 animate-fade-up" style="animation-delay:.08s">
-          <span class="w-1.5 h-1.5 rounded-full bg-sand-400 animate-pulse2"></span>
-          Our story · Est. 2010
-        </span>
 
         <h1 class="font-display text-6xl sm:text-7xl lg:text-8xl font-light text-white leading-none mb-6 animate-fade-up" style="animation-delay:.14s">
         Discover the Soul<br/>
@@ -370,16 +357,16 @@
           <em class="italic shimmer-text">Cambodia.</em>
         </h1>
 
-        <p class="text-white/60 text-base sm:text-lg leading-relaxed max-w-xl font-light animate-fade-up" style="animation-delay:.22s">
+        <p class="text-white/60 text-lg sm:text-lg leading-relaxed max-w-xl font-light animate-fade-up" style="animation-delay:.22s">
          Cambodia is a land of ancient temples, rich culture, and breathtaking landscapes. From the majestic Angkor temples to vibrant local markets and pristine islands, every journey here tells a story of history, resilience, and beauty.
         </p>
 
         <div class="flex flex-wrap gap-4 mt-10 animate-fade-up" style="animation-delay:.30s">
-          <a href="#story" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white font-semibold text-sm shadow-lg hover:shadow-sand-500/35 transition-all duration-200 active:scale-95">
+          <a href="#story" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white font-semibold text-lg shadow-lg hover:shadow-sand-500/35 transition-all duration-200 active:scale-95">
             Our Story
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
           </a>
-          <a href="contact.html" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/18 border border-white/20 text-white font-medium text-sm transition-all duration-200">
+          <a href="contact.html" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/18 border border-white/20 text-white font-medium text-lg transition-all duration-200">
             Work With Us
           </a>
         </div>
@@ -396,45 +383,6 @@
 
 
   <!-- ═══════════════════ STATS BAND ═══════════════════ -->
-  <section class="bg-sand-50 dark:bg-slate-950 py-14 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <div class="stat-1 text-center group">
-          <div class="font-display text-5xl sm:text-6xl font-light text-slate-900 dark:text-white group-hover:text-sand-500 dark:group-hover:text-sand-400 transition-colors duration-300">
-            2<span class="text-sand-500">M</span><span class="text-3xl text-sand-400">+</span>
-          </div>
-          <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-2">Annual Visitors</div>
-          <div class="text-xs text-slate-400 mt-1">exploring Cambodia</div>
-        </div>
-
-        <div class="stat-2 text-center group">
-          <div class="font-display text-5xl sm:text-6xl font-light text-slate-900 dark:text-white group-hover:text-sand-500 dark:group-hover:text-sand-400 transition-colors duration-300">
-            100<span class="text-sand-500">+</span>
-          </div>
-          <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-2">Destinations</div>
-          <div class="text-xs text-slate-400 mt-1">temples, beaches & cities</div>
-        </div>
-
-        <div class="stat-3 text-center group">
-          <div class="font-display text-5xl sm:text-6xl font-light text-slate-900 dark:text-white group-hover:text-sand-500 dark:group-hover:text-sand-400 transition-colors duration-300">
-            4.8<span class="text-sand-500">★</span>
-          </div>
-          <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-2">Visitor Rating</div>
-          <div class="text-xs text-slate-400 mt-1">based on travel reviews</div>
-        </div>
-
-        <div class="stat-4 text-center group">
-          <div class="font-display text-5xl sm:text-6xl font-light text-slate-900 dark:text-white group-hover:text-sand-500 dark:group-hover:text-sand-400 transition-colors duration-300">
-            1000<span class="text-sand-500">yr</span>
-          </div>
-          <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-2">Cultural History</div>
-          <div class="text-xs text-slate-400 mt-1">Khmer heritage</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
 
   <!-- ═══════════════════ STORY SECTION ═══════════════════ -->
@@ -444,12 +392,12 @@
 
         <!-- Left: Text -->
         <div class="reveal-scroll">
-          <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Discover Cambodia</span>
+          <span class="text-sand-500 text-sm font-semibold tracking-widest uppercase">Discover Cambodia</span>
           <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white leading-tight">
-             A land of ancient wonders,<br/><em class="italic text-sand-500">culture, and natural beauty.</em>
+             A land of ancient wonders,<br/>culture, and natural beauty.
           </h2>
 
-          <div class="mt-6 space-y-4 text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+          <div class="mt-6 space-y-4 text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
             <p>
              Cambodia is one of Southeast Asia’s most fascinating destinations, rich in history and cultural heritage. At its heart lies Angkor Wat, the largest religious monument in the world, showcasing the grandeur of the ancient Khmer Empire.
           </p>
@@ -463,16 +411,15 @@
 
           <!-- Pull quote -->
           <blockquote class="pull-quote pl-5 mt-8">
-            <p class="font-display text-xl italic text-slate-700 dark:text-slate-200 leading-snug">"Travel Cambodia not just to see its beauty, but to feel its history, culture, and spirit."
-          "</p>
-            <footer class="mt-2 text-xs text-slate-400 font-medium">— Cambodia Tourism</footer>
+            <p class="font-display text-2xl italic text-slate-700 dark:text-slate-200 leading-snug">"Travel Cambodia not just to see its beauty, but to feel its history, culture, and spirit."
+          </p>
           </blockquote>
 
           <div class="flex gap-4 mt-8">
-            <a href="#team" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-sm font-semibold shadow transition-all duration-200 hover:shadow-sand-400/30">
+            <a href="#team" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-lg font-semibold shadow transition-all duration-200 hover:shadow-sand-400/30">
               Top Destinations
             </a>
-            <a href="#values" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-200 dark:border-slate-700 hover:border-sand-400 text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors">
+            <a href="#values" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-200 dark:border-slate-700 hover:border-sand-400 text-slate-700 dark:text-slate-200 text-lg font-medium transition-colors">
               Why Visit Cambodia
             </a>
           </div>
@@ -518,9 +465,8 @@
     <div class="max-w-7xl mx-auto px-6">
 
       <div class="text-center max-w-xl mx-auto mb-14 reveal-scroll">
-        <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">What we believe</span>
-        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white"> Inspired by Cambodia,<br/><em class="italic">guide every journey</em></h2>
-        <p class="mt-3 text-slate-500 dark:text-slate-400 text-sm leading-relaxed"> Rooted in Khmer culture and shaped by local experience — these are the values that define how we create meaningful journeys across Cambodia.
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white"> Inspired by Cambodia,<br/>guide every journey</h2>
+        <p class="mt-3 text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> Rooted in Khmer culture and shaped by local experience — these are the values that define how we create meaningful journeys across Cambodia.
       </p>
       </div>
 
@@ -531,7 +477,7 @@
             <svg class="w-6 h-6 text-sand-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
           </div>
           <h3 class="font-display text-2xl font-semibold dark:text-white mb-2">Personal Khmer Touch</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"> Every traveler experiences Cambodia differently. From the temples of Angkor to hidden countryside villages, we design journeys that reflect your story — not a template.
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> Every traveler experiences Cambodia differently. From the temples of Angkor to hidden countryside villages, we design journeys that reflect your story — not a template.
         </p>
         </div>
 
@@ -540,7 +486,7 @@
             <svg class="w-6 h-6 text-sand-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
           </div>
           <h3 class="font-display text-2xl font-semibold dark:text-white mb-2">Community First</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">We proudly partner with local Khmer guides, family-run guesthouses, and community businesses to ensure tourism directly supports Cambodian livelihoods.
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed">We proudly partner with local Khmer guides, family-run guesthouses, and community businesses to ensure tourism directly supports Cambodian livelihoods.
         </p>
         </div>
 
@@ -549,7 +495,7 @@
             <svg class="w-6 h-6 text-sand-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
           </div>
           <h3 class="font-display text-2xl font-semibold dark:text-white mb-2">Cultural Connection</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"> Travel here is about more than sightseeing. It’s about sharing meals, stories, and traditions — creating genuine connections with Cambodian people and culture.
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> Travel here is about more than sightseeing. It’s about sharing meals, stories, and traditions — creating genuine connections with Cambodian people and culture.
         </p>
         </div>
 
@@ -558,7 +504,7 @@
             <svg class="w-6 h-6 text-sand-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525"/></svg>
           </div>
           <h3 class="font-display text-2xl font-semibold dark:text-white mb-2">Respect for Nature</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"> From the Mekong River to the Cardamom Mountains, we promote responsible travel that protects Cambodia’s natural beauty for future generations.
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> From the Mekong River to the Cardamom Mountains, we promote responsible travel that protects Cambodia’s natural beauty for future generations.
         </p>
         </div>
 
@@ -567,7 +513,7 @@
             <svg class="w-6 h-6 text-sand-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
           </div>
           <h3 class="font-display text-2xl font-semibold dark:text-white mb-2">Trusted & Safe</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"> Your safety is our priority. We carefully vet every route, guide, and accommodation so you can explore Cambodia with complete peace of mind.
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> Your safety is our priority. We carefully vet every route, guide, and accommodation so you can explore Cambodia with complete peace of mind.
         </p>
         </div>
 
@@ -578,7 +524,7 @@
               <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
             </div>
             <h3 class="font-display text-2xl font-semibold text-white mb-2">Khmer Excellence</h3>
-            <p class="text-white/75 text-sm leading-relaxed"> We bring pride and care into every detail — from curated temple visits to authentic local experiences — ensuring your journey through Cambodia is unforgettable.
+            <p class="text-white/75 text-lg leading-relaxed"> We bring pride and care into every detail — from curated temple visits to authentic local experiences — ensuring your journey through Cambodia is unforgettable.
           </p>
           </div>
         </div>
@@ -588,20 +534,19 @@
   </section>
 
 
-  <!-- ═══════════════════ TEAM ═══════════════════ -->
+<!-- Team -->
 <section id="team" class="bg-white dark:bg-slate-900 py-24 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-6">
     <div class="text-center max-w-xl mx-auto mb-14 reveal-scroll">
-      <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">The people behind it</span>
-      <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white">Meet our <em class="italic">leadership team</em></h2>
-      <p class="mt-3 text-slate-500 dark:text-slate-400 text-sm leading-relaxed">Explorers, storytellers, and obsessive problem-solvers — united by an unshakeable love of travel.</p>
+      <h2 class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white">Meet our leadership team</h2>
+      <p class="mt-3 text-slate-500 dark:text-slate-400 text-lg leading-relaxed">Explorers, storytellers, and obsessive problem-solvers — united by an unshakeable love of travel.</p>
     </div>
 
     <!-- Top row: 3 cards -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
 
 
-      <!-- Member 1 — Mom Lisa -->
+
     <!-- Member 1 — Mom Lisa -->
 <div class="team-card a1 bg-sand-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl dark:hover:shadow-black/40">
   <div class="relative h-80 overflow-hidden">
@@ -613,17 +558,13 @@
 />
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
     <div class="absolute bottom-3 left-3">
-      <span class="px-2.5 py-1 rounded-full bg-sand-500/80 backdrop-blur text-white text-xs font-semibold">Founder & CEO</span>
+      <span class="px-2.5 py-1 rounded-full bg-sand-500/80 backdrop-blur text-white text-xs font-semibold">Group Leader</span>
     </div>
   </div>
   <div class="p-5">
-    <h3 class="font-display text-xl font-semibold dark:text-white">Mom Lisa</h3>
-    <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mt-2">Visionary founder and driving force behind the company. Leads with passion and a deep commitment to excellence.</p>
-    <div class="flex items-center gap-2 mt-4">
-      <a href="#" class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-sand-100 dark:hover:bg-slate-600 flex items-center justify-center transition-colors">
-        <svg class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-      </a>
-    </div>
+    <h3 class="font-display text-2xl font-semibold dark:text-white">Mom Lisa</h3>
+    <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Visionary founder and driving force behind the company. Leads with passion and a deep commitment to excellence.</p>
+
   </div>
 </div>
 
@@ -633,17 +574,12 @@
           <img src="../about/img/bansethdarasak.JPG" alt="Ban Sethdarasak" class="card-img w-full h-full object-cover object-top"/>
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-slate-700/80 backdrop-blur text-white text-xs font-semibold">Co-Founder</span>
+            <span class="px-2.5 py-1 rounded-full bg-slate-700/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
           </div>
         </div>
         <div class="p-5">
-          <h3 class="font-display text-xl font-semibold dark:text-white">Ban Sethdarasak</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mt-2">Strategic thinker and co-founder. Brings a sharp eye for opportunity and a talent for building lasting partnerships.</p>
-          <div class="flex items-center gap-2 mt-4">
-            <a href="#" class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-sand-100 dark:hover:bg-slate-600 flex items-center justify-center transition-colors">
-              <svg class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
+          <h3 class="font-display text-2xl font-semibold dark:text-white">Ban Sethdarasak</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Strategic thinker and co-founder. Brings a sharp eye for opportunity and a talent for building lasting partnerships.</p>
         </div>
       </div>
       <!-- Member 3 — Chom Nadaraguel -->
@@ -652,17 +588,12 @@
           <img src="../about/img/chomnadaraguel.jpg" alt="Chom Nadaraguel" class="card-img w-full h-full object-cover object-top"/>
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-teal-500/80 backdrop-blur text-white text-xs font-semibold">Head of Operations</span>
+            <span class="px-2.5 py-1 rounded-full bg-teal-500/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
           </div>
         </div>
         <div class="p-5">
-          <h3 class="font-display text-xl font-semibold dark:text-white">Chom Nadaraguel</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mt-2">Keeps everything running smoothly behind the scenes. Detail-oriented and dedicated to delivering seamless experiences.</p>
-          <div class="flex items-center gap-2 mt-4">
-            <a href="#" class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-sand-100 dark:hover:bg-slate-600 flex items-center justify-center transition-colors">
-              <svg class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
+          <h3 class="font-display text-2xl font-semibold dark:text-white">Chom Nadaraguel</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Keeps everything running smoothly behind the scenes. Detail-oriented and dedicated to delivering seamless experiences.</p>
         </div>
       </div>
 
@@ -677,17 +608,12 @@
           <img src="../about/img/leangseavminh.JPG" alt="Leang SeavMinh" class="card-img w-full h-full object-cover object-top"/>
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-blue-500/80 backdrop-blur text-white text-xs font-semibold">Head of Destinations</span>
+            <span class="px-2.5 py-1 rounded-full bg-blue-500/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
           </div>
         </div>
         <div class="p-5">
-          <h3 class="font-display text-xl font-semibold dark:text-white">Leang SeavMinh</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mt-2">Passionate about uncovering hidden gems. Personally scouts every destination to ensure an unforgettable experience.</p>
-          <div class="flex items-center gap-2 mt-4">
-            <a href="#" class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-sand-100 dark:hover:bg-slate-600 flex items-center justify-center transition-colors">
-              <svg class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
+          <h3 class="font-display text-2xl font-semibold dark:text-white">Leang SeavMinh</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Passionate about uncovering hidden gems. Personally scouts every destination to ensure an unforgettable experience.</p>
         </div>
       </div>
 
@@ -698,17 +624,12 @@
           <img src="../about/img/Kim Sreypin.jpg" alt="Kim Sreypin" class="card-img w-full h-full object-cover object-top"/>
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-purple-500/80 backdrop-blur text-white text-xs font-semibold">Head of Marketing</span>
+            <span class="px-2.5 py-1 rounded-full bg-purple-500/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
           </div>
         </div>
         <div class="p-5">
-          <h3 class="font-display text-xl font-semibold dark:text-white">Kim Sreypin</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mt-2">Creative storyteller with a flair for connecting people to places. Shapes the brand voice with warmth and precision.</p>
-          <div class="flex items-center gap-2 mt-4">
-            <a href="#" class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-sand-100 dark:hover:bg-slate-600 flex items-center justify-center transition-colors">
-              <svg class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-          </div>
+          <h3 class="font-display text-2xl font-semibold dark:text-white">Kim Sreypin</h3>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Creative storyteller with a flair for connecting people to places. Shapes the brand voice with warmth and precision.</p>
         </div>
       </div>
 
@@ -717,8 +638,8 @@
     <!-- Join us CTA — outside the grid -->
     <div class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6 bg-sand-50 dark:bg-slate-800 rounded-3xl p-8 border border-sand-100 dark:border-slate-700/50 reveal-scroll">
       <div>
-        <h3 class="font-display text-2xl font-semibold dark:text-white">Want to join our team?</h3>
-        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">We're always looking for passionate people who believe travel can change the world.</p>
+        <h3 class="font-display text-3xl font-semibold dark:text-white">Want to join our team?</h3>
+        <p class="text-slate-500 dark:text-slate-400 text-lg mt-1">We're always looking for passionate people who believe travel can change the world.</p>
       </div>
       <a href="contact.html" class="shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white font-semibold text-sm shadow-lg hover:shadow-sand-400/30 transition-all duration-200 whitespace-nowrap">
         View Open Roles
@@ -726,17 +647,15 @@
       </a>
     </div>
 
-  </div> <!-- closes max-w-7xl -->
+  </div> 
 </section>
 
-  <!-- ═══════════════════ AWARDS & PRESS ═══════════════════ -->
   <section class="bg-white dark:bg-slate-900 py-20 transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-6">
 
     <!-- Awards -->
     <div class="text-center mb-10 reveal-scroll">
-      <span class="text-sand-500 text-xs font-semibold tracking-widest uppercase">Recognition</span>
-      <h2 class="font-display text-3xl sm:text-4xl font-semibold mt-2 dark:text-white">Award-winning <em class="italic">experiences</em></h2>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold mt-2 dark:text-white">Award winning experiences</h2>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-16 reveal-scroll">
@@ -745,91 +664,44 @@
         <div class="w-10 h-10 rounded-full bg-sand-100 dark:bg-sand-900/30 flex items-center justify-center mx-auto mb-3">
           <svg class="w-5 h-5 text-sand-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <div class="text-xs font-bold text-slate-700 dark:text-white leading-tight">Best Local Tour Operator</div>
-        <div class="text-xs text-sand-500 mt-1 font-semibold">Cambodia Tourism Federation</div>
-        <div class="text-xs text-slate-400 mt-0.5">2023, 2022, 2021</div>
+        <div class="text-xl font-bold text-slate-700 dark:text-white leading-tight">Best Local Tour Operator</div>
+        <div class="text-lg text-sand-500 mt-1 font-semibold">Cambodia Tourism Federation</div>
+        <div class="text-sm text-slate-400 mt-0.5">2023, 2022, 2021</div>
       </div>
 
       <div class="award-badge bg-sand-50 dark:bg-slate-800 rounded-2xl p-5 text-center border border-sand-100 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow cursor-default">
         <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-3">
           <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22c0 0-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 12a3 3 0 100-6 3 3 0 000 6z"/></svg>
         </div>
-        <div class="text-xs font-bold text-slate-700 dark:text-white leading-tight">Responsible Travel Award</div>
-        <div class="text-xs text-sand-500 mt-1 font-semibold">ASEAN Tourism Board</div>
-        <div class="text-xs text-slate-400 mt-0.5">2022</div>
+        <div class="text-xl font-bold text-slate-700 dark:text-white leading-tight">Responsible Travel Award</div>
+        <div class="text-lg text-sand-500 mt-1 font-semibold">ASEAN Tourism Board</div>
+        <div class="text-sm text-slate-400 mt-0.5">2022</div>
       </div>
 
       <div class="award-badge bg-sand-50 dark:bg-slate-800 rounded-2xl p-5 text-center border border-sand-100 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow cursor-default">
         <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mx-auto mb-3">
           <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
         </div>
-        <div class="text-xs font-bold text-slate-700 dark:text-white leading-tight">Travellers' Choice</div>
-        <div class="text-xs text-sand-500 mt-1 font-semibold">TripAdvisor</div>
-        <div class="text-xs text-slate-400 mt-0.5">5 consecutive years</div>
+        <div class="text-xl font-bold text-slate-700 dark:text-white leading-tight">Travellers' Choice</div>
+        <div class="text-lg text-sand-500 mt-1 font-semibold">TripAdvisor</div>
+        <div class="text-sm text-slate-400 mt-0.5">5 consecutive years</div>
       </div>
 
       <div class="award-badge bg-sand-50 dark:bg-slate-800 rounded-2xl p-5 text-center border border-sand-100 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow cursor-default">
         <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mx-auto mb-3">
           <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h1v11H4zm15 0h1v11h-1zm-7 0h1v11h-1z"/></svg>
         </div>
-        <div class="text-xs font-bold text-slate-700 dark:text-white leading-tight">Excellence in Cultural Tourism</div>
-        <div class="text-xs text-sand-500 mt-1 font-semibold">Ministry of Tourism Cambodia</div>
-        <div class="text-xs text-slate-400 mt-0.5">2024</div>
+        <div class="text-xl font-bold text-slate-700 dark:text-white leading-tight">Excellence in Cultural Tourism</div>
+        <div class="text-lg text-sand-500 mt-1 font-semibold">Ministry of Tourism Cambodia</div>
+        <div class="text-sm text-slate-400 mt-0.5">2024</div>
       </div>
 
     </div> 
       <!-- Press logos marquee -->
-      <div class="overflow-hidden">
-  <p class="text-center text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">As featured in</p>
-  <div class="marquee-track gap-12 items-center">
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Khmer Times</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Phnom Penh Post</span>
-    <span class="press-logo mx-8 font-display text-xl font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">ASEAN NOW</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Cambodia Daily</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">National Geographic</span>
-    <span class="press-logo mx-8 font-display text-xl font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">BBC Travel</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Lonely Planet</span>
-    <!-- Duplicate for seamless loop -->
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Khmer Times</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Phnom Penh Post</span>
-    <span class="press-logo mx-8 font-display text-xl font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">ASEAN NOW</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Cambodia Daily</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">National Geographic</span>
-    <span class="press-logo mx-8 font-display text-xl font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">BBC Travel</span>
-    <span class="press-logo mx-8 font-display text-2xl font-semibold text-slate-400 whitespace-nowrap">Lonely Planet</span>
-  </div>
-</div>
   </section>
 
-
   <!-- ═══════════════════ CTA FINAL ═══════════════════ -->
-  <section class="relative overflow-hidden py-0">
-  <div class="relative h-80 sm:h-96">
-    <img src="https://tse1.mm.bing.net/th/id/OIP.KqJQknDoeuCQnorfYnTgtgHaE7?w=1280&h=853&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Angkor Wat Cambodia" class="w-full h-full object-cover"/>
-    <div class="absolute inset-0 bg-gradient-to-r from-slate-900/92 via-slate-900/65 to-transparent dark:from-black/95 dark:via-black/70"></div>
-    <div class="absolute inset-0 flex items-center">
-      <div class="max-w-7xl mx-auto px-6 w-full">
-        <div class="max-w-lg reveal-scroll">
-          <h2 class="font-display text-4xl sm:text-5xl font-light text-white leading-tight">
-            Ready to discover<br/>
-            <em class="italic text-sand-300">the Kingdom?</em>
-          </h2>
-          <p class="mt-3 text-white/55 text-sm font-light">From the temples of Angkor to the shores of Koh Rong — your Cambodian adventure starts with one message.</p>
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a href="destinations.html" class="px-7 py-3.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-sm font-semibold shadow-lg transition-all duration-200 hover:shadow-sand-500/30">
-              Browse Destinations
-            </a>
-            <a href="contact.html" class="px-7 py-3.5 rounded-full bg-white/12 backdrop-blur border border-white/25 hover:bg-white/22 text-white text-sm font-semibold transition-all duration-200">
-              Talk to Us
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
        <footer
       class="bg-slate-900 dark:bg-slate-950 text-slate-400 pt-16 pb-8 transition-colors duration-300"
     >
@@ -848,37 +720,37 @@
                 >Angkor-Travels</span
               >
             </div>
-            <p class="text-sm leading-relaxed text-slate-500 mb-5">
+            <p class="text-lg leading-relaxed text-slate-500 mb-5">
              Angkor-Travel is your premier gateway to the Kingdom of Wonder, offering expert-led tours through the majestic ruins of the Angkor Archaeological Park. 
             </p> 
           </div>
 
           <div>
-            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+            <h4 class="text-white text-xl font-semibold mb-4 tracking-wide">
               Explore
             </h4>
             <ul class="space-y-2.5 text-sm">
               <li>
                 <a
                   href="/index.html"
-                  class="hover:text-sand-400 transition-colors"
+                  class="hover:text-sand-400 transition-colors text-lg"
                   >Home</a
                 >
               </li>
               <li>
                 <a
                   href="/src/page/product/Destinations.html"
-                  class="hover:text-sand-400 transition-colors"
+                  class="hover:text-sand-400 transition-colors text-lg"
                   >Destinations</a
                 >
               </li>
               <li>
-                <a href="/src/page/details/detailpage.html" class="hover:text-sand-400 transition-colors"
+                <a href="/src/page/details/detailpage.html" class="hover:text-sand-400 transition-colors text-lg"
                   >Details</a
                 >
               </li>
               <li>
-                <a href="/src/page/about/about.html" class="hover:text-sand-400 transition-colors"
+                <a href="/src/page/about/about.html" class="hover:text-sand-400 transition-colors text-lg"
                   >About us</a
                 >
               </li>
@@ -886,24 +758,24 @@
           </div>
 
           <div>
-            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+            <h4 class="text-white text-xl font-semibold mb-4 tracking-wide">
               Contacts
             </h4>
             <ul class="space-y-2.5 text-sm">
               <li>
-                <a href="#" class="hover:text-sand-400 transition-colors"
+                <a href="#" class="hover:text-sand-400 transition-colors text-lg"
                   ><i class="fa-brands fa-telegram" style="color: rgb(168, 164, 164);"></i>Telegram</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-sand-400 transition-colors"
+                <a href="#" class="hover:text-sand-400 transition-colors text-lg"
                   ><i class="fa-brands fa-facebook" style="color: rgb(168, 164, 164);"></i>Facebook</a
                 >
               </li>
               <li>
                 <a
                   href="contact.html"
-                  class="hover:text-sand-400 transition-colors"
+                  class="hover:text-sand-400 transition-colors text-lg"
                   ><i class="fa-solid fa-envelope" style="color: rgb(168, 164, 164);"></i>Email</a
                 >
               </li>
@@ -911,10 +783,10 @@
           </div>
 
           <div>
-            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+            <h4 class="text-white font-semibold mb-4 tracking-wide text-lg">
               Stay Inspired
             </h4>
-            <p class="text-sm text-slate-500 mb-4">
+            <p class="text-lg text-slate-500 mb-4">
               Get exclusive deals and travel inspo straight to your inbox.
             </p>
             <div class="flex gap-2">
@@ -933,17 +805,17 @@
         </div>
 
         <div
-          class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600"
+          class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-lg text-slate-600"
         >
-          <span>© 2025 Angkor-Travels. All rights reserved.</span>
+          <span>© 2026 Angkor-Travels. All rights reserved.</span>
           <div class="flex gap-5">
-            <a href="#" class="hover:text-slate-400 transition-colors"
+            <a href="#" class="hover:text-slate-400 transition-colors  text-lg"
               >Privacy Policy</a
             >
-            <a href="#" class="hover:text-slate-400 transition-colors"
+            <a href="#" class="hover:text-slate-400 transition-colors  text-lg"
               >Terms of Service</a
             >
-            <a href="#" class="hover:text-slate-400 transition-colors"
+            <a href="#" class="hover:text-slate-400 transition-colors  text-lg"
               >Cookie Settings</a
             >
           </div>
@@ -958,6 +830,27 @@
       var dark=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);
       if(dark){document.documentElement.classList.add('dark');document.getElementById('darkToggle').checked=true;}
     })();
+      // ─── Navbar scroll effect ─────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    const logoText = document.querySelector('.font-display.text-2xl');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('bg-white/95', 'dark:bg-slate-900/95', 'backdrop-blur-xl', 'shadow-md', 'shadow-black/5', 'border-b', 'border-slate-200/50', 'dark:border-slate-800/50');
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.remove('text-white', 'text-white/80');
+          l.classList.add('text-slate-700', 'dark:text-slate-300');
+        });
+        if (logoText) { logoText.classList.remove('text-white'); logoText.classList.add('text-slate-800', 'dark:text-white'); }
+      } else {
+        navbar.classList.remove('bg-white/95', 'dark:bg-slate-900/95', 'backdrop-blur-xl', 'shadow-md', 'shadow-black/5', 'border-b', 'border-slate-200/50', 'dark:border-slate-800/50');
+        document.querySelectorAll('.nav-link').forEach(l => {
+          l.classList.add('text-white');
+          l.classList.remove('text-slate-700', 'dark:text-slate-300');
+        });
+        if (logoText) { logoText.classList.add('text-white'); logoText.classList.remove('text-slate-800', 'dark:text-white'); }
+      }
+    });
   </script>
+       
 </body>
 </html>

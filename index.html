@@ -137,16 +137,17 @@
         opacity: 1;
         transform: translateY(0);
       }
+        .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 1.5px;
+      background: #d4853a;
+      transition: width 0.3s ease;
+      margin-top: 2px;
+    }
 
-      .nav-link::after {
-        content: "";
-        display: block;
-        width: 0;
-        height: 1.5px;
-        background: #d4853a;
-        transition: width 0.3s ease;
-        margin-top: 2px;
-      }
       .nav-link:hover::after,
       .nav-link.active::after {
         width: 100%;
@@ -287,7 +288,7 @@
           </button>     
           <a
             href="./src/page/auth/register.html"
-            class="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-sm font-semibold shadow-lg hover:shadow-sand-500/30 transition-all duration-200"
+            class="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-lg font-semibold shadow-lg hover:shadow-sand-500/30 transition-all duration-200"
           >
                     Sign in
             <svg
@@ -368,12 +369,6 @@
         style="animation-delay: -3s"
       ></div>
 
-      <div
-        class="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white/90 text-xs font-medium tracking-widest uppercase animate-fade-in"
-      >
-        <span class="w-1.5 h-1.5 rounded-full bg-sand-400 animate-pulse"></span>
-        2026's Top Travel Experiences
-      </div>
 
       <h1
         class="font-display text-center text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white leading-none tracking-tight drop-shadow-2xl animate-fade-up px-4"
@@ -382,7 +377,7 @@
         Angkor <em class="italic text-sand-300">Travels</em>
       </h1>
       <p
-        class="mt-5 text-center text-white/70 text-base sm:text-lg max-w-xl px-6 font-light leading-relaxed animate-fade-up"
+        class="mt-5 text-center text-white/70 sm:text-lg max-w-xl px-6 font-light leading-relaxed animate-fade-up text-lg"
         style="animation-delay: 0.2s"
       >
         Curated journeys to the world's most extraordinary places. Let every
@@ -418,7 +413,7 @@
             <input
               type="text"
               placeholder="Where do you want to go?"
-              class="bg-transparent text-white placeholder-white/50 text-sm w-full focus:outline-none"
+              class="bg-transparent text-white placeholder-white/50 text-lg w-full focus:outline-none"
             />
           </div>
           <div class="hidden sm:block w-px bg-white/20 my-2"></div>
@@ -459,34 +454,34 @@
         </div>
 
         <div class="flex flex-wrap gap-2 mt-4 justify-center">
-          <span class="text-white/50 text-xs font-medium"
+          <span class="text-white/50 text-lg font-medium"
             >Popular in Cambodia:</span
           >
           <a
             href="#"
-            class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors"
-            >🏔️ Mountain</a
+            class="text-white/70 hover:text-sand-300 text-lg font-medium transition-colors"
+            > Mountain</a
           >
           <a
             href="#"
-            class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors"
-            >🏝️ Island</a
+            class="text-white/70 hover:text-sand-300 text-lg font-medium transition-colors"
+            > Island</a
           >
           <a
             href="#"
-            class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors"
-            >🏛️ historical site</a
+            class="text-white/70 hover:text-sand-300 text-lg font-medium transition-colors"
+            > historical site</a
           >
           <a
             href="#"
-            class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors"
+            class="text-white/70 hover:text-sand-300 text-lg font-medium transition-colors"
           >
-            🏞️ nature / scenic place</a
+             nature / scenic place</a
           >
           <a
             href="#"
-            class="text-white/70 hover:text-sand-300 text-xs font-medium transition-colors"
-            >⛩️ temple</a
+            class="text-white/70 hover:text-sand-300 text-lg font-medium transition-colors"
+            > temple</a
           >
         </div>
       </div>
@@ -502,7 +497,7 @@
             >
               120<span class="text-sand-400">+</span>
             </div>
-            <div class="text-xs tracking-widest uppercase mt-0.5 text-white/50">
+            <div class="text-lg tracking-widest uppercase mt-0.5 text-white/50">
               Destinations
             </div>
           </div>
@@ -513,7 +508,7 @@
             >
               40k<span class="text-sand-400">+</span>
             </div>
-            <div class="text-xs tracking-widest uppercase mt-0.5 text-white/50">
+            <div class="text-lg tracking-widest uppercase mt-0.5 text-white/50">
               Happy Travelers
             </div>
           </div>
@@ -524,7 +519,7 @@
             >
               4.9<span class="text-sand-400">★</span>
             </div>
-            <div class="text-xs tracking-widest uppercase mt-0.5 text-white/50">
+            <div class="text-lg tracking-widest uppercase mt-0.5 text-white/50">
               Average Rating
             </div>
           </div>
@@ -550,10 +545,6 @@
       <div class="max-w-7xl mx-auto px-6">
         <div class="flex items-center justify-between mb-8 reveal">
           <div>
-            <span
-              class="text-sand-500 text-xs font-semibold tracking-widest uppercase"
-              >Browse by type</span
-            >
             <h2
               class="font-display text-3xl sm:text-4xl font-semibold mt-1 dark:text-white"
             >
@@ -563,39 +554,29 @@
         </div>
         <div class="flex flex-wrap gap-3 reveal">
           <button
-            class="cat-pill active px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium transition-all duration-200 hover:border-sand-500"
+            class="cat-pill active px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-lg font-medium transition-all duration-200 hover:border-sand-500"
           >
             All
           </button>
           <button
-            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
+            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-lg font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
           >
-            🏔️ Adventure
+             Adventure
           </button>
           <button
-            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
+            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-lg font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
           >
-            🏖️ Beach & Coastal
+             Beach & Coastal
           </button>
           <button
-            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
+            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-lg font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
           >
-            🏛️ Cultural
+             Cultural
           </button>
           <button
-            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
+            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-lg font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
           >
-            🌿 Eco & Nature
-          </button>
-          <button
-            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
-          >
-            💎 Luxury
-          </button>
-          <button
-            class="cat-pill px-5 py-2.5 rounded-full border border-sand-200 dark:border-slate-700 text-sm font-medium dark:text-slate-300 transition-all duration-200 hover:border-sand-500"
-          >
-            🍜 Culinary
+             Eco & Nature
           </button>
         </div>
       </div>
@@ -609,23 +590,19 @@
           class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 reveal"
         >
           <div>
-            <span
-              class="text-sand-500 text-xs font-semibold tracking-widest uppercase"
-              >Hand-picked</span
-            >
             <h2
               class="font-display text-4xl sm:text-5xl font-semibold mt-1 dark:text-white"
             >
-              Featured <em class="italic">Destinations</em>
+              Featured Destinations
             </h2>
-            <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm max-w-md">
+            <p class="mt-2 text-slate-500 dark:text-slate-400 text-lg max-w-md">
               Our travel experts curate only the finest experiences from around
               the globe.
             </p>
           </div>
           <a
             href="destinations.html"
-            class="inline-flex items-center gap-2 text-sand-600 dark:text-sand-400 text-sm font-semibold hover:gap-3 transition-all"
+            class="inline-flex items-center gap-2 text-sand-600 dark:text-sand-400 text-lg font-semibold hover:gap-3 transition-all"
           >
             View all destinations
             <svg
@@ -737,7 +714,7 @@
                   <span class="text-sm font-semibold dark:text-white">4.8</span>
                 </div>
               </div>
-              <p class="text-slate-500 dark:text-slate-400 text-xl mb-4">
+              <p class="text-slate-500 dark:text-slate-400 text-lg mb-4">
                 elephants , waterfall , forest , hiking and jungles.
               </p>
               <div class="flex items-center justify-between">
@@ -790,7 +767,7 @@
                   <span class="text-sm font-semibold dark:text-white">4.9</span>
                 </div>
               </div>
-              <p class="text-slate-500 dark:text-slate-400 text-xl mb-4">
+              <p class="text-slate-500 dark:text-slate-400 text-lg mb-4">
                 exploring the main shrine, observing Buddhist devotees lighting
                 incense, strolling the surrounding park with, and seeing the
                 massive clock.
@@ -845,7 +822,7 @@
                   <span class="text-sm font-semibold dark:text-white"></span>
                 </div>
               </div>
-              <p class="text-slate-500 dark:text-slate-400 text-xl mb-4">
+              <p class="text-slate-500 dark:text-slate-400 text-lg mb-4">
                 fishing , white sand beach, Scuba Diving , Sunset ,Snorkeling.
               </p>
               <div class="flex items-center justify-between">
@@ -867,14 +844,10 @@
     >
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-16 reveal">
-          <span
-            class="text-sand-500 text-xs font-semibold tracking-widest uppercase"
-            >Why Angkor-Travels</span
-          >
           <h2
             class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white"
           >
-            The Angkor-Travels <em class="italic">Difference</em>
+            The Angkor Travels Difference
           </h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -882,13 +855,13 @@
             <div
               class="w-14 h-14 mx-auto rounded-2xl bg-sand-50 dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-100 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"
             >
-              🧭
+              <i class="fa-regular fa-compass" style="color: rgb(9, 9, 10);"></i>
             </div>
-            <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">
+            <h3 class="font-display text-2xl font-semibold mb-2 dark:text-white">
               Expert Curation
             </h3>
             <p
-              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"
+              class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"
             >
               Every trip is designed by travel specialists who've lived there,
               not just visited.
@@ -899,13 +872,13 @@
             <div
               class="w-14 h-14 mx-auto rounded-2xl bg-sand-50 dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-100 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"
             >
-              🛡️
+              <i class="fa-solid fa-shield-halved" style="color: rgb(158, 65, 65);"></i>
             </div>
-            <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">
+            <h3 class="font-display text-2xl font-semibold mb-2 dark:text-white">
               Fully Insured
             </h3>
             <p
-              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"
+              class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"
             >
               All safely visited include comprehensive travel protection and
               24/7 emergency support.
@@ -916,13 +889,13 @@
             <div
               class="w-14 h-14 mx-auto rounded-2xl bg-sand-50 dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-100 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"
             >
-              💳
+              <i class="fa-regular fa-credit-card" style="color: rgb(10, 64, 114);"></i>
             </div>
-            <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">
+            <h3 class="font-display text-2xl font-semibold mb-2 dark:text-white">
               Best price for visited
             </h3>
             <p
-              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"
+              class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"
             >
               We match any lower price you find and refund the difference,
               guaranteed.
@@ -933,13 +906,13 @@
             <div
               class="w-14 h-14 mx-auto rounded-2xl bg-sand-50 dark:bg-slate-800 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-sand-100 dark:group-hover:bg-slate-700 transition-all duration-300 shadow-sm"
             >
-              🌿
+              <i class="fa-brands fa-pagelines" style="color: rgb(54, 148, 33);"></i>
             </div>
-            <h3 class="font-display text-xl font-semibold mb-2 dark:text-white">
+            <h3 class="font-display text-2xl font-semibold mb-2 dark:text-white">
               Sustainable Travel
             </h3>
             <p
-              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed"
+              class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"
             >
               Offset your carbon footprint automatically. We donate 1% to
               eco-conservation.
@@ -954,17 +927,17 @@
     >
       <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-14 reveal">
-          <span
+          <!-- <span
             class="text-sand-500 text-xs font-semibold tracking-widest uppercase"
             >Real Stories</span
-          >
+          > -->
           <h2
             class="font-display text-4xl sm:text-5xl font-semibold mt-2 dark:text-white"
           >
-            From Our <em class="italic">Travelers</em>
+            From Our Travelers
           </h2>
           <p
-            class="mt-3 text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto"
+            class="mt-3 text-slate-500 dark:text-slate-400 text-lg max-w-md mx-auto"
           >
             Don't just take our word for it — hear from the 40,000+ adventurers
             who've journeyed with us.
@@ -978,7 +951,7 @@
           >
             <div class="stars text-lg mb-4">★★★★★</div>
             <p
-              class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed italic font-light mb-6"
+              class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed italic font-light mb-6"
             >
               Siem Reap is the best city in Cambodia.That's very amazing,and
               have alots wonderful temples and very clean.And those people are
@@ -986,12 +959,12 @@
             </p>
             <div class="flex items-center gap-3">
               <img
-                src="./image/DSC_0102 copy.jpg"
+                src="/image/seavmind.jpg"
                 alt="minh"
                 class="h-12 w-12 rounded-full object-cover"
               />
               <div>
-                <div class="text-sm font-semibold dark:text-white">
+                <div class="text-xl font-semibold dark:text-white">
                   Leang seavminh
                 </div>
                 <div class="text-xs text-slate-400">Siem Reap, Cambodia</div>
@@ -1004,19 +977,19 @@
             style="transition-delay: 0.1s"
           >
             <div class="text-white/70 text-lg mb-4">★★★★★</div>
-            <p class="text-white/90 text-sm leading-relaxed italic font-light">
+            <p class="text-white/90 text-lg leading-relaxed italic font-light">
               Modulkiri is the Eco ever in Cambobia.The natural is very good
               view . this is good for hiking and tenting and enjoy with the
               fresh air and going to water fall is the best view ever in there.
             </p>
             <div class="flex items-center gap-3">
               <img
-                src="./image/03 (4).JPG"
+                src="/image/sak.jpg"
                 alt="sak"
                 class="h-12 w-12 rounded-full object-cover"
               />
               <div>
-                <div class="text-sm font-semibold dark:text-white">
+                <div class="text-xl font-semibold dark:text-white">
                   Ban sethdarasak
                 </div>
                 <div class="text-xs text-white/60">Modulkiri, Cambodia</div>
@@ -1030,7 +1003,7 @@
           >
             <div class="stars text-lg mb-4">★★★★★</div>
             <p
-              class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed italic font-light mb-6"
+              class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed italic font-light mb-6"
             >
               Koh Kong,Kep,Sihanouk is the best beach ever in Cambodia.That's
               really best vibe and fun . Enjoy with the sea and sunset and enjoy
@@ -1038,12 +1011,12 @@
             </p>
             <div class="flex items-center gap-3">
               <img
-                src="./image/file:/home/puthea-reach/Pictures/photo_2026-04-23_19-00-21.jpg"
+                src="/image/raguel.jpg"
                 alt=""
                 class="h-12 w-12 rounded-full object-cover"
               />
               <div>
-                <div class="text-sm font-semibold dark:text-white">
+                <div class="text-xl font-semibold dark:text-white">
                   Raguel Chhom
                 </div>
                 <div class="text-xs text-slate-400">
@@ -1074,37 +1047,37 @@
                 >Angkor-Travels</span
               >
             </div>
-            <p class="text-sm leading-relaxed text-slate-500 mb-5">
+            <p class="text-lg leading-relaxed text-slate-500 mb-5">
              Angkor-Travel is your premier gateway to the Kingdom of Wonder, offering expert-led tours through the majestic ruins of the Angkor Archaeological Park. 
             </p> 
           </div>
 
           <div>
-            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+            <h4 class="text-white text-xl font-semibold mb-4 tracking-wide">
               Explore
             </h4>
             <ul class="space-y-2.5 text-sm">
               <li>
                 <a
                   href="/index.html"
-                  class="hover:text-sand-400 transition-colors"
+                  class="hover:text-sand-400 transition-colors text-lg"
                   >Home</a
                 >
               </li>
               <li>
                 <a
                   href="/src/page/product/Destinations.html"
-                  class="hover:text-sand-400 transition-colors"
+                  class="hover:text-sand-400 transition-colors text-lg"
                   >Destinations</a
                 >
               </li>
               <li>
-                <a href="/src/page/details/detailpage.html" class="hover:text-sand-400 transition-colors"
+                <a href="/src/page/details/detailpage.html" class="hover:text-sand-400 transition-colors text-lg"
                   >Details</a
                 >
               </li>
               <li>
-                <a href="/src/page/about/about.html" class="hover:text-sand-400 transition-colors"
+                <a href="/src/page/about/about.html" class="hover:text-sand-400 transition-colors text-lg"
                   >About us</a
                 >
               </li>
@@ -1112,24 +1085,24 @@
           </div>
 
           <div>
-            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+            <h4 class="text-white text-xl font-semibold mb-4 tracking-wide">
               Contacts
             </h4>
             <ul class="space-y-2.5 text-sm">
               <li>
-                <a href="#" class="hover:text-sand-400 transition-colors"
+                <a href="#" class="hover:text-sand-400 transition-colors text-lg"
                   ><i class="fa-brands fa-telegram" style="color: rgb(168, 164, 164);"></i>Telegram</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-sand-400 transition-colors"
+                <a href="#" class="hover:text-sand-400 transition-colors text-lg"
                   ><i class="fa-brands fa-facebook" style="color: rgb(168, 164, 164);"></i>Facebook</a
                 >
               </li>
               <li>
                 <a
                   href="contact.html"
-                  class="hover:text-sand-400 transition-colors"
+                  class="hover:text-sand-400 transition-colors text-lg"
                   ><i class="fa-solid fa-envelope" style="color: rgb(168, 164, 164);"></i>Email</a
                 >
               </li>
@@ -1137,10 +1110,10 @@
           </div>
 
           <div>
-            <h4 class="text-white text-sm font-semibold mb-4 tracking-wide">
+            <h4 class="text-white font-semibold mb-4 tracking-wide text-lg">
               Stay Inspired
             </h4>
-            <p class="text-sm text-slate-500 mb-4">
+            <p class="text-lg text-slate-500 mb-4">
               Get exclusive deals and travel inspo straight to your inbox.
             </p>
             <div class="flex gap-2">
@@ -1159,17 +1132,17 @@
         </div>
 
         <div
-          class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600"
+          class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-lg text-slate-600"
         >
-          <span>© 2025 Angkor-Travels. All rights reserved.</span>
+          <span>© 2026 Angkor-Travels. All rights reserved.</span>
           <div class="flex gap-5">
-            <a href="#" class="hover:text-slate-400 transition-colors"
+            <a href="#" class="hover:text-slate-400 transition-colors  text-lg"
               >Privacy Policy</a
             >
-            <a href="#" class="hover:text-slate-400 transition-colors"
+            <a href="#" class="hover:text-slate-400 transition-colors  text-lg"
               >Terms of Service</a
             >
-            <a href="#" class="hover:text-slate-400 transition-colors"
+            <a href="#" class="hover:text-slate-400 transition-colors  text-lg"
               >Cookie Settings</a
             >
           </div>
