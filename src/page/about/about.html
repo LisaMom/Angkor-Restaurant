@@ -216,7 +216,7 @@
             />
           </div>
           <span
-            class="font-display text-2xl font-semibold text-white drop-shadow-md tracking-wide"
+            class="font-display text-2xl font-semibold text-slate-800 dark:text-white drop-shadow-md tracking-wide"
             >Angkor-Travels</span
           >
         </a>
@@ -225,28 +225,28 @@
           <li>
             <a
               href="/index.html"
-              class="nav-link active text-white text-xl font-medium tracking-wide drop-shadow"
+              class="nav-link text-slate-600 dark:text-white/80 hover:text-slate-900 dark:hover:text-white text-xl font-medium tracking-wide transition-colors"
               >Home</a
             >
           </li>
           <li>
             <a
               href="../product/Destinations.html"
-              class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors"
+              class="nav-link text-slate-600 dark:text-white/80 hover:text-slate-900 dark:hover:text-white text-xl font-medium tracking-wide transition-colors"
               >Destinations</a
             >
           </li>
             <li>
             <a
               href="../details/detailpage.html"
-              class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors"
+              class="nav-link text-slate-600 dark:text-white/80 hover:text-slate-900 dark:hover:text-white text-xl font-medium tracking-wide transition-colors"
               >Details</a
             >
           </li>
           <li>
             <a
               href="../about/about.html"
-              class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors"
+              class="nav-link active text-slate-900 dark:text-white text-xl font-medium tracking-wide transition-colors"
               >About us</a
             >
           </li>
@@ -256,11 +256,12 @@
           <button
             id="themeToggle"
             aria-label="Toggle dark mode"
-            class="relative w-14 h-7 rounded-full toggle-track bg-white/20 dark:bg-slate-700 border border-white/30 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sand-400"
+            onclick="var d=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',d?'dark':'light');"
+            class="relative w-14 h-7 rounded-full toggle-track bg-sand-400 dark:bg-slate-700 border border-sand-500 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sand-400 transition-colors duration-300"
           >
             <span
               id="toggleThumb"
-              class="toggle-thumb absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-xs dark:translate-x-7"
+              class="toggle-thumb absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-xs transition-transform duration-300 dark:translate-x-7"
             >
               <svg
                 id="sunIcon"
@@ -305,7 +306,7 @@
           </a>
           <button
             id="menuBtn"
-            class="md:hidden text-white"
+            class="md:hidden text-slate-700 dark:text-white"
             aria-label="Open menu"
           >
 
