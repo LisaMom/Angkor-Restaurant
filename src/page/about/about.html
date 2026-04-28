@@ -211,65 +211,99 @@
                     <img class="w-full h-full object-cover" src="../../img/remove-logo.png" alt="Angkor Travels logo" />
                 </div>
           <span
-            class="font-display text-2xl font-semibold text-white drop-shadow-md tracking-wide"
+            class="font-display text-2xl font-semibold text-slate-800 dark:text-white drop-shadow-md tracking-wide"
             >Angkor-Travels</span
           >
             </a>
 
-            <!-- Desktop nav links -->
-            
-            <ul class="hidden md:flex items-center gap-8">
-                <li>
-                    <a href="/index.html"
-                        class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors ">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="/src/page/product/Destinations.html"
-                        class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors">
-                        Destinations
-                    </a>
-                </li>
-                <li>
-                    
-                    <a href="/src/page/details/detailpage.html"
-                        class="nav-link active text-white text-xl font-medium tracking-wide drop-shadow">
-                        Details
-                    </a>
-                </li>
-                <li>
-                    <a href="/src/page/about/about.html"
-                        class="nav-link text-white/80 hover:text-white text-xl font-medium tracking-wide drop-shadow transition-colors">
-                        About Us
-                    </a>
-                </li>
-            </ul>
+        <ul class="hidden md:flex items-center gap-8">
+          <li>
+            <a
+              href="/index.html"
+              class="nav-link text-slate-600 dark:text-white/80 hover:text-slate-900 dark:hover:text-white text-xl font-medium tracking-wide transition-colors"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="../product/Destinations.html"
+              class="nav-link text-slate-600 dark:text-white/80 hover:text-slate-900 dark:hover:text-white text-xl font-medium tracking-wide transition-colors"
+              >Destinations</a
+            >
+          </li>
+            <li>
+            <a
+              href="../details/detailpage.html"
+              class="nav-link text-slate-600 dark:text-white/80 hover:text-slate-900 dark:hover:text-white text-xl font-medium tracking-wide transition-colors"
+              >Details</a
+            >
+          </li>
+          <li>
+            <a
+              href="../about/about.html"
+              class="nav-link active text-slate-900 dark:text-white text-xl font-medium tracking-wide transition-colors"
+              >About us</a
+            >
+          </li>
+        </ul>
 
-            <div class="flex items-center gap-4">
-                <!-- Dark Mode Toggle -->
-                
-                <button id="themeToggle" aria-label="Toggle dark mode"
-                    class="relative w-14 h-7 rounded-full bg-white/20 dark:bg-slate-700 border border-white/30 dark:border-slate-600 focus:outline-none">
-                    <span id="toggleThumb"
-                        class="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-xs dark:translate-x-7">
-                        <svg id="sunIcon" class="w-3.5 h-3.5 text-sand-500 absolute" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.78a1 1 0 011.42 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71zm-9.86 0l.71.71A1 1 0 115.65 5.9l-.71-.71A1 1 0 014.36 3.78zM10 5a5 5 0 100 10A5 5 0 0010 5zm8 4h-1a1 1 0 110-2h1a1 1 0 110 2zm-14 0H3a1 1 0 110-2h1a1 1 0 110 2zm10.95 4.95a1 1 0 011.42 0l.71.71a1 1 0 11-1.42 1.42l-.71-.71a1 1 0 010-1.42zm-10.32 0a1 1 0 010 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71a1 1 0 011.42 0zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" />
-                        </svg>
-                        <svg id="moonIcon" class="w-3.5 h-3.5 text-slate-700 absolute" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                        </svg>
-                    </span>
-                </button>
-
-                <!-- Sign In button !-->
-                <a href="./src/page/auth/register.html"
-                    class="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-sm font-semibold shadow-lg transition-all duration-200">
+        <div class="flex items-center gap-4">
+          <button
+            id="themeToggle"
+            aria-label="Toggle dark mode"
+            onclick="var d=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',d?'dark':'light');"
+            class="relative w-14 h-7 rounded-full toggle-track bg-sand-400 dark:bg-slate-700 border border-sand-500 dark:border-slate-600 focus:outline-none focus:ring-2 focus:ring-sand-400 transition-colors duration-300"
+          >
+            <span
+              id="toggleThumb"
+              class="toggle-thumb absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center text-xs transition-transform duration-300 dark:translate-x-7"
+            >
+              <svg
+                id="sunIcon"
+                class="w-3.5 h-3.5 text-sand-500 dark:hidden"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.78a1 1 0 011.42 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71zm-9.86 0l.71.71A1 1 0 115.65 5.9l-.71-.71A1 1 0 014.36 3.78zM10 5a5 5 0 100 10A5 5 0 0010 5zm8 4h-1a1 1 0 110-2h1a1 1 0 110 2zm-14 0H3a1 1 0 110-2h1a1 1 0 110 2zm10.95 4.95a1 1 0 011.42 0l.71.71a1 1 0 11-1.42 1.42l-.71-.71a1 1 0 010-1.42zm-10.32 0a1 1 0 010 1.42l-.71.71a1 1 0 11-1.42-1.42l.71-.71a1 1 0 011.42 0zM10 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"
+                />
+              </svg>
+              <svg
+                id="moonIcon"
+                class="w-3.5 h-3.5 text-slate-700 hidden dark:block"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                />
+              </svg>
+            </span>
+          </button>     
+          <a
+            href="../auth/register.html"
+            class="hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-sm font-semibold shadow-lg hover:shadow-sand-500/30 transition-all duration-200"
+          >
                     Sign in
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                </a>
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </a>
+          <button
+            id="menuBtn"
+            class="md:hidden text-slate-700 dark:text-white"
+            aria-label="Open menu"
+          >
 
                 <!-- Mobile hamburger -->
                 <button id="menuBtn" class="md:hidden text-white" aria-label="Open menu">
