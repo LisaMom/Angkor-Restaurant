@@ -16,15 +16,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            display: ['Playfair Display', 'serif'],
-            sans: ['Lora', 'serif'],     
+            display: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
           },
           colors: {
             sand: {
@@ -73,7 +73,7 @@
     }
   </script>
   <style>
-    .font-display { font-family: 'Playfair Display', serif; }
+    .font-display { font-family: 'Cormorant Garamond', serif; }
 
     /* ── Grain overlay ── */
     body::after {
@@ -141,29 +141,7 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── Global scale-up ── */
-    html { font-size: 16px; }
-    p, li, a, span, input, button, label { font-size: inherit; }
-    p { font-size: 18px !important; }
 
-    /* ── Footer scale down ── */
-    footer { font-size: 13px !important; }
-    footer h4 { font-size: 14px !important; }
-    footer a, footer p, footer li, footer span { font-size: 13px !important; }
-    footer .text-xl { font-size: 15px !important; }
-    footer .text-lg { font-size: 14px !important; }
-    footer .text-sm { font-size: 13px !important; }
-    footer input, footer button { font-size: 12px !important; }
-    footer .pt-8 span, footer .pt-8 a { font-size: 12px !important; }
-    .text-sm   { font-size: 1rem    !important; }
-    .text-xs   { font-size: 0.88rem !important; }
-    .text-base { font-size: 1.15rem !important; }
-    .text-lg   { font-size: 1.3rem  !important; }
-    .text-xl   { font-size: 1.5rem  !important; }
-    .text-2xl  { font-size: 1.8rem  !important; }
-    .text-3xl  { font-size: 2.2rem  !important; }
-    .text-4xl  { font-size: 2.8rem  !important; }
-    .text-5xl  { font-size: 3.6rem  !important; }
 
     /* ── Scale up images & cards ── */
     .dest-card .card-img-wrap { height: 240px !important; }
