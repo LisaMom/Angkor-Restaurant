@@ -304,7 +304,7 @@
                 <li>
                     
                     <a href="/src/page/details/detailpage.html"
-                        class="nav-link active text-white text-xl font-medium tracking-wide drop-shadow">
+                        class="nav-link active text-xl font-medium tracking-wide drop-shadow transition-colors">
                         Details
                     </a>
                 </li>
@@ -1292,8 +1292,11 @@
             navbar.classList.toggle('dark:border-slate-800/50', scrolled);
 
             navLinks.forEach(l => {
-                // Don't change color on the active link — it stays white always
-                if (!l.classList.contains('active')) {
+                if (l.classList.contains('active')) {
+                    l.classList.toggle('text-slate-800',      scrolled);
+                    l.classList.toggle('dark:text-sand-400',  scrolled);
+                    l.classList.toggle('text-white',          !scrolled);
+                } else {
                     l.classList.toggle('text-slate-700',      scrolled);
                     l.classList.toggle('dark:text-slate-300', scrolled);
                     l.classList.toggle('text-white/80',       !scrolled);
