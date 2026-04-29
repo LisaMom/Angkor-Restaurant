@@ -18,6 +18,18 @@
     input[type="password"]::-ms-clear {
       display: none;
     }
+    
+          .auth-logo {
+        position: relative;
+        gap: 5px;
+        z-index: 2;
+        bottom: 50%;
+        right: 5%;
+        
+      }
+      .auth-logo img {
+        height: 100px;
+      }
   </style>  
 </head>
 <body>
@@ -80,10 +92,10 @@
               </div>
 
             <div class="mb-6">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Password<span style="color: red;">*</span></label>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password<span style="color: red;">*</span></label>
                 <div class="relative">
                   <input
-                    :type="showPassword ? 'text' : 'password'"
+                    :type="showPassword ? 'text' : 'Confirm password'"
                     x-model="password"
                     required
                     class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"

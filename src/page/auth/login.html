@@ -18,6 +18,18 @@
     input[type="password"]::-ms-clear {
       display: none;
     }
+       
+          .auth-logo {
+        position: relative;
+        gap: 5px;
+        z-index: 2;
+        bottom: 50%;
+        right: 15%;
+        
+      }
+      .auth-logo img {
+        height: 100px;
+      }
   </style>  
 </head>
     
@@ -27,6 +39,14 @@
     <div class="min-h-screen flex">
       <!-- Left Side - Auth Forms -->
       <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+               <div class="auth-logo" >
+        <a href="/"
+          ><img
+            src="/src/img/remove-logo.png"
+            alt="logo-angkor travel"
+            onerror="this.style.display = 'none'"
+        /></a>
+      </div>
         <div class="w-full max-w-md">
           <!-- Form Container -->
           <div class="bg-white rounded-2xl shadow-xl p-8">
