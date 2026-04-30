@@ -209,6 +209,106 @@
       max-height: 500px;
       opacity: 1;
     }
+
+.member-socials {
+  display: flex;
+  justify-content: start;
+  gap: 5px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+
+}
+.member-social-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.member-social-btn:hover {
+  opacity: 0.8;
+}
+
+.btn-tg {
+  background: #0088cc;
+}
+
+.btn-gh {
+  background: #333333;
+}
+
+.btn-fb {
+  background: #1877f2;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, var(--green-dark), var(--green-main));
+  padding: 60px 24px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.04) 60px,
+      rgba(255, 255, 255, 0.04) 80px);
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title {
+  font-family: "Suwannaphum", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.cta-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 28px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: var(--radius-full);
+  font-family: "Suwannaphum", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: barestaurant-cardckground 0.2s;
+  text-decoration: none;
+}
+
+.cta-btn:hover {
+  background: #b8943a;
+}
+
   </style>
 </head>
 
@@ -553,78 +653,80 @@
     </div>
 
     <!-- Top row: 3 cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-
-
-
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12  max-w-5xl mx-auto ">
     <!-- Member 1 — Mom Lisa -->
 <div class="team-card a1 bg-sand-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl dark:hover:shadow-black/40">
   <div class="relative h-80 overflow-hidden">
  <img 
-  src="../about/img/mine.jpg" 
+  src="./img/momlisa.png" 
   alt="Mom Lisa" 
   class="card-img w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
-  style="filter: contrast(1.04) saturate(1.08) brightness(1.06);"
 />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-    <div class="absolute bottom-3 left-3">
-      <span class="px-2.5 py-1 rounded-full bg-sand-500/80 backdrop-blur text-white text-xs font-semibold">Group Leader</span>
-    </div>
   </div>
   <div class="p-5">
     <h3 class="font-display text-2xl font-semibold dark:text-white">Mom Lisa</h3>
-    <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Visionary founder and driving force behind the company. Leads with passion and a deep commitment to excellence.</p>
-
+    <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Group Leader</p>
   </div>
+              <div class="member-socials">
+    <a class="member-social-btn btn-tg" href="#"><i class="fa-brands fa-telegram"></i></a>
+    <a class="member-social-btn btn-gh" href="#"><i class="fa-brands fa-github"></i></a>
+    <a class="member-social-btn btn-fb" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
 </div>
 
+
       <!-- Member 2 — Ban Sethdarasak -->
-      <div class="team-card a2 bg-sand-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl dark:hover:shadow-black/40">
+      <div class="team-card bg-sand-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl dark:hover:shadow-black/40">
         <div class="relative h-80 overflow-hidden">
           <img src="../about/img/bansethdarasak.JPG" alt="Ban Sethdarasak" class="card-img w-full h-full object-cover object-top"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-slate-700/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
-          </div>
+
         </div>
         <div class="p-5">
           <h3 class="font-display text-2xl font-semibold dark:text-white">Ban Sethdarasak</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Strategic thinker and co-founder. Brings a sharp eye for opportunity and a talent for building lasting partnerships.</p>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Front-End Developer</p>
         </div>
+            <div class="member-socials">
+    <a class="member-social-btn btn-tg" href="#"><i class="fa-brands fa-telegram"></i></a>
+    <a class="member-social-btn btn-gh" href="#"><i class="fa-brands fa-github"></i></a>
+    <a class="member-social-btn btn-fb" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
       </div>
       <!-- Member 3 — Chom Nadaraguel -->
       <div class="team-card a3 bg-sand-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl dark:hover:shadow-black/40">
         <div class="relative h-80 overflow-hidden">
           <img src="../about/img/chomnadaraguel.jpg" alt="Chom Nadaraguel" class="card-img w-full h-full object-cover object-top"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-teal-500/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
-          </div>
         </div>
         <div class="p-5">
           <h3 class="font-display text-2xl font-semibold dark:text-white">Chom Nadaraguel</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Keeps everything running smoothly behind the scenes. Detail-oriented and dedicated to delivering seamless experiences.</p>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Front-End Developer</p>
         </div>
+                    <div class="member-socials">
+    <a class="member-social-btn btn-tg" href="#"><i class="fa-brands fa-telegram"></i></a>
+    <a class="member-social-btn btn-gh" href="#"><i class="fa-brands fa-github"></i></a>
+    <a class="member-social-btn btn-fb" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
       </div>
 
     </div>
 
     <!-- Bottom row: 2 cards, centered -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mt-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2
+    gap-10 max-w-2xl mx-auto mt-6">
 
       <!-- Member 4 — Leang SeavMinh -->
       <div class="team-card a4 bg-sand-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl dark:hover:shadow-black/40">
         <div class="relative h-80 overflow-hidden">
           <img src="../about/img/leangseavminh.JPG" alt="Leang SeavMinh" class="card-img w-full h-full object-cover object-top"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-blue-500/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
-          </div>
         </div>
         <div class="p-5">
           <h3 class="font-display text-2xl font-semibold dark:text-white">Leang SeavMinh</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Passionate about uncovering hidden gems. Personally scouts every destination to ensure an unforgettable experience.</p>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Front-End Developer</p>
         </div>
+                    <div class="member-socials">
+    <a class="member-social-btn btn-tg" href="#"><i class="fa-brands fa-telegram"></i></a>
+    <a class="member-social-btn btn-gh" href="#"><i class="fa-brands fa-github"></i></a>
+    <a class="member-social-btn btn-fb" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
       </div>
 
 
@@ -632,15 +734,16 @@
       <div class="team-card a5 bg-sand-50 dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700/50 shadow-sm hover:shadow-xl dark:hover:shadow-black/40">
         <div class="relative h-80 overflow-hidden">
           <img src="../about/img/Kim Sreypin.jpg" alt="Kim Sreypin" class="card-img w-full h-full object-cover object-top"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          <div class="absolute bottom-3 left-3">
-            <span class="px-2.5 py-1 rounded-full bg-purple-500/80 backdrop-blur text-white text-xs font-semibold">Front-End Developer</span>
-          </div>
         </div>
         <div class="p-5">
           <h3 class="font-display text-2xl font-semibold dark:text-white">Kim Sreypin</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Creative storyteller with a flair for connecting people to places. Shapes the brand voice with warmth and precision.</p>
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed mt-2">Front-End Developer</p>
         </div>
+                    <div class="member-socials">
+    <a class="member-social-btn btn-tg" href="#"><i class="fa-brands fa-telegram"></i></a>
+    <a class="member-social-btn btn-gh" href="#"><i class="fa-brands fa-github"></i></a>
+    <a class="member-social-btn btn-fb" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
       </div>
 
 </div> <!-- closes sm:grid-cols-2 grid -->
