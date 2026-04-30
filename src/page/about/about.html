@@ -13,54 +13,61 @@
     <meta property="og:image" content="/src/img/remove-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Cormorant Garamond', 'serif'],
-            sans:    ['DM Sans', 'sans-serif'],
-          },
-          colors: {
-            sand: {
-              50:'#fdf8f0', 100:'#f9eedc', 200:'#f2dab8',
-              300:'#e8c08a', 400:'#dc9f57', 500:'#d4853a',
-              600:'#c66d2f', 700:'#a55327', 800:'#854227', 900:'#6c3723',
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Cormorant Garamond", "serif"],
+              sans: ["DM Sans", "sans-serif"],
+            },
+            colors: {
+              sand: {
+                50: "#fdf8f0",
+                100: "#f9eedc",
+                200: "#f2dab8",
+                300: "#e8c08a",
+                400: "#dc9f57",
+                500: "#d4853a",
+                600: "#c66d2f",
+                700: "#a55327",
+                800: "#854227",
+                900: "#6c3723",
+              },
+              slate: {
+                850: "#1a2236",
+                950: "#0d1321",
+              },
+            },
+            animation: {
+              "fade-up": "fadeUp 0.7s ease forwards",
+              "fade-in": "fadeIn 0.6s ease forwards",
+              float: "float 6s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeUp: {
+                "0%": { opacity: "0", transform: "translateY(30px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-12px)" },
+              },
             },
           },
-          keyframes: {
-            fadeUp:    {'0%':{opacity:'0',transform:'translateY(28px)'},'100%':{opacity:'1',transform:'translateY(0)'}},
-            fadeIn:    {'0%':{opacity:'0'},'100%':{opacity:'1'}},
-            fadeLeft:  {'0%':{opacity:'0',transform:'translateX(-28px)'},'100%':{opacity:'1',transform:'translateX(0)'}},
-            fadeRight: {'0%':{opacity:'0',transform:'translateX(28px)'},'100%':{opacity:'1',transform:'translateX(0)'}},
-            scaleIn:   {'0%':{opacity:'0',transform:'scale(0.92)'},'100%':{opacity:'1',transform:'scale(1)'}},
-            float:     {'0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-12px)'}},
-            ken:       {'0%':{transform:'scale(1)'},'100%':{transform:'scale(1.06)'}},
-            countUp:   {'0%':{opacity:'0',transform:'translateY(12px)'},'100%':{opacity:'1',transform:'translateY(0)'}},
-            shimmer:   {'0%':{backgroundPosition:'200% center'},'100%':{backgroundPosition:'-200% center'}},
-            spin_slow: {'0%':{transform:'rotate(0deg)'},'100%':{transform:'rotate(360deg)'}},
-            pulse2:    {'0%,100%':{opacity:'1'},'50%':{opacity:'.4'}},
-            drawLine:  {'0%':{strokeDashoffset:'1000'},'100%':{strokeDashoffset:'0'}},
-          },
-          animation: {
-            'fade-up'   : 'fadeUp .7s ease both',
-            'fade-in'   : 'fadeIn .6s ease both',
-            'fade-left' : 'fadeLeft .7s ease both',
-            'fade-right': 'fadeRight .7s ease both',
-            'scale-in'  : 'scaleIn .6s ease both',
-            'float'     : 'float 7s ease-in-out infinite',
-            'ken'       : 'ken 14s ease-in-out infinite alternate',
-            'shimmer'   : 'shimmer 3.5s linear infinite',
-            'spin-slow' : 'spin_slow 20s linear infinite',
-            'pulse2'    : 'pulse2 2s ease-in-out infinite',
-          }
-        }
-      }
-    }
-  </script>
+        },
+      };
+    </script>
   <style>
     /* ── Grain overlay ── */
     body::after {
@@ -190,6 +197,18 @@
       .nav-link.active::after {
         width: 100%;
       }
+
+    /* ── Mobile Menu Dropdown ── */
+    #mobileMenu {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    }
+    #mobileMenu.open {
+      max-height: 500px;
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -301,33 +320,26 @@
           </a>
           <button
             id="menuBtn"
-            class="md:hidden text-slate-700 dark:text-white"
+            class="md:hidden text-white"
             aria-label="Open menu"
           >
-
-                <!-- Mobile hamburger -->
-                <button id="menuBtn" class="md:hidden text-white" aria-label="Open menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
         </nav>
 
-        <!-- Mobile menu -->
-        <div id="mobileMenu"
-            class="hidden md:hidden bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 space-y-4">
-            <a href="/index.html" class="block text-white/70 hover:text-white transition-colors font-medium">Home</a>
-            <a href="./src/page/product/Destinations.html" class="block text-white/70 hover:text-white transition-colors font-medium">Destinations</a>
-            <a href="./src/page/details/detailpage.html" class="block text-white font-medium border-l-2 border-sand-500 pl-3">Details</a>
-            <a href="./src/page/about/about.html" class="block text-white/70 hover:text-white transition-colors font-medium">About Us</a>
-            <div class="pt-4 border-t border-white/10">
-                <a href="./src/page/auth/register.html"
-                    class="block text-center py-2.5 rounded-full bg-sand-500 hover:bg-sand-600 text-white text-lg font-semibold transition-colors">
-                    Sign In
-                </a>
-            </div>
-        </div>
+        <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/10 px-6 py-6 space-y-4">
+      <a href="/index.html" class="block text-white/70 hover:text-white transition-colors">Home</a>
+      <a href="../product/Destinations.html" class="block text-white font-medium">Destinations</a>
+      <a href="../details/detailpage.html" class="block text-white/70 hover:text-white transition-colors">Details</a>
+      <a href="../about/about.html" class="block text-white/70 hover:text-white transition-colors">About Us</a>
+      <div class="pt-4 border-t border-white/10 flex gap-3">
+        <a href="../auth/register.html" class="flex-1 text-center py-2.5 rounded-full border border-white/30 text-white text-sm">Sign In</a>
+    </div>
+    </div>
     </header>
 
 
@@ -383,12 +395,7 @@
       </svg>
     </div>
   </section>
-
-
-  <!-- ═══════════════════ STATS BAND ═══════════════════ -->
-
-
-  <!-- ═══════════════════ STORY SECTION ═══════════════════ -->
+  
   <section id="story" class="bg-white dark:bg-slate-900 py-24 transition-colors duration-300">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -402,7 +409,7 @@
 
           <div class="mt-6 space-y-4 text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
             <p>
-             Cambodia is one of Southeast Asia’s most fascinating destinations, rich in history and cultural heritage. At its heart lies Angkor Wat, the largest religious monument in the world, showcasing the grandeur of the ancient Khmer Empire.
+             Cambodia is one of Southeast Asia's most fascinating destinations, rich in history and cultural heritage. At its heart lies Angkor Wat, the largest religious monument in the world, showcasing the grandeur of the ancient Khmer Empire.
           </p>
             <p>
               Beyond the temples, Cambodia offers a wide range of experiences — from the vibrant capital of Phnom Penh to the peaceful charm of Siem Reap, and the stunning white-sand beaches of Koh Rong. Visitors can explore floating villages, lush jungles, and lively local markets.
@@ -498,7 +505,7 @@
             <svg class="w-6 h-6 text-sand-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
           </div>
           <h3 class="font-display text-2xl font-semibold dark:text-white mb-2">Cultural Connection</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> Travel here is about more than sightseeing. It’s about sharing meals, stories, and traditions — creating genuine connections with Cambodian people and culture.
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> Travel here is about more than sightseeing. It's about sharing meals, stories, and traditions — creating genuine connections with Cambodian people and culture.
         </p>
         </div>
 
@@ -507,7 +514,7 @@
             <svg class="w-6 h-6 text-sand-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525"/></svg>
           </div>
           <h3 class="font-display text-2xl font-semibold dark:text-white mb-2">Respect for Nature</h3>
-          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> From the Mekong River to the Cardamom Mountains, we promote responsible travel that protects Cambodia’s natural beauty for future generations.
+          <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed"> From the Mekong River to the Cardamom Mountains, we promote responsible travel that protects Cambodia's natural beauty for future generations.
         </p>
         </div>
 
@@ -665,7 +672,7 @@
 
       <div class="award-badge bg-sand-50 dark:bg-slate-800 rounded-2xl p-5 text-center border border-sand-100 dark:border-slate-700/50 shadow-sm hover:shadow-md transition-shadow cursor-default">
         <div class="w-10 h-10 rounded-full bg-sand-100 dark:bg-sand-900/30 flex items-center justify-center mx-auto mb-3">
-          <svg class="w-5 h-5 text-sand-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="w-5 h-5 text-sand-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
         </div>
         <div class="text-xl font-bold text-slate-700 dark:text-white leading-tight">Best Local Tour Operator</div>
         <div class="text-lg text-sand-500 mt-1 font-semibold">Cambodia Tourism Federation</div>
@@ -833,7 +840,7 @@
       var dark=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);
       if(dark){document.documentElement.classList.add('dark');document.getElementById('darkToggle').checked=true;}
     })();
-      // ─── Navbar scroll effect ─────────────────────────────────────────
+         // ─── Navbar scroll effect ─────────────────────────────────────────
     const navbar = document.getElementById('navbar');
     const logoText = document.querySelector('.font-display.text-2xl');
     window.addEventListener('scroll', () => {
@@ -853,6 +860,30 @@
         if (logoText) { logoText.classList.add('text-white'); logoText.classList.remove('text-slate-800', 'dark:text-white'); }
       }
     });
+
+    // ─── Scroll Reveal ────────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ─── Category Pills ───────────────────────────────────────────────
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cagitt-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+      });
+    });
+
+    // ─── Mobile Menu ──────────────────────────────────────────────────
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
   </script>
        
 </body>

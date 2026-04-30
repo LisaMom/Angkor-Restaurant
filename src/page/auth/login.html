@@ -30,6 +30,53 @@
       .auth-logo img {
         height: 100px;
       }
+        @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+          overflow-y: auto;
+        }
+
+        .auth-left {
+          width: 100%;
+          flex-direction: row;
+          align-items: center;
+          padding: 14px 20px;
+          min-height: auto;
+          justify-content: flex-start;
+          gap: 12px;
+        }
+        .auth-food-card,
+        .auth-quote {
+          display: none;
+        }
+        .auth-left::before,
+        .auth-left::after {
+          display: none;
+        }
+
+        .auth-logo img {
+          height: 60px;
+        }
+
+        .auth-right {
+          padding: 24px 22px 40px;
+          align-items: flex-start;
+        }
+        .auth-title {
+          font-size: 1.75rem;
+        }
+        .form-row-2 {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+      }
+
+      @media screen and (max-width: 420px) {
+        .auth-left,
+        .dark .auth-left {
+          display: none !important;
+        }
+      }
   </style>  
 </head>
     
@@ -133,13 +180,14 @@
 
       <!-- Right Side - Image -->
       <div
-        class="hidden lg:block lg:w-1/2 bg-cover bg-center"
+        class="hidden  lg:block lg:w-1/2 bg-cover bg-center"
         style="background-image: url('https://img.freepik.com/premium-photo/joyful-road-trip-through-lush-mountains_332713-6651.jpg?semt=ais_incoming&w=740&q=80')"
       >
         <div class="h-full bg-black bg-opacity-50 flex items-center justify-center">
           <div class="text-center text-white px-12">
             <h2 class="text-4xl font-bold mb-6">Let's Trip Together</h2>
-            <p class="text-xl">Pack your bags and find your tribe. Register now to plan, share, and experience the ultimate Cambodian road trip.</p>
+            <p class="text-xl">Your story continues where the ancient world waits.
+Welcome back to the enduring heart of Cambodia.</p>
           </div>
         </div>
       </div>

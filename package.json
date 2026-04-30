@@ -6,10 +6,6 @@
   },
 
   "scripts": {
-<<<<<<< HEAD
-    
-=======
->>>>>>> d679b35f2f46705a02b00a1fabbc899d9f6b2889
     "dev": "npx @tailwindcss/cli -i ./src/css/input.css -o ./src/css/output.css --watch"
   }
 }
